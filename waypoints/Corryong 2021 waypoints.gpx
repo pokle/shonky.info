@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1"
+     creator="GpsDump 5.12"
+     version="1.1"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <metadata>
+    <link href="http://www.gethome.no/stein.sorensen/">
+      <text>GPS dump for www.flightlog.org</text>
+    </link>
+    <time>2017-12-15T01:19:37Z</time>
+    <bounds minlat="-36.452233" minlon="147.320500" maxlat="-35.685367" maxlon="148.250533"/>
+  </metadata>
+  <wpt lat="-36.263625" lon="148.020958">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>BIGARA</name>
+    <cmt>BIGARA</cmt>
+    <desc>BIGARA</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.175211" lon="148.149586">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>BRADGP</name>
+    <cmt>Bradneys Gap</cmt>
+    <desc>Bradneys Gap</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.142867" lon="148.051778">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>BRNBRG</name>
+    <cmt>BRNBRG</cmt>
+    <desc>BRNBRG</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.218033" lon="147.828883">
+    <ele>329.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>CLCCLC</name>
+    <cmt>CLCCLC</cmt>
+    <desc>CLCCLC</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.185000" lon="147.891400">
+    <ele>291.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>CORRY</name>
+    <cmt>CORRY</cmt>
+    <desc>CORRY</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.192283" lon="147.770217">
+    <ele>325.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>CUDG</name>
+    <cmt>CUDG</cmt>
+    <desc>CUDG</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.096867" lon="147.814283">
+    <ele>314.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>CUDGNO</name>
+    <cmt>CUDGNO</cmt>
+    <desc>CUDGNO</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.223183" lon="147.728800">
+    <ele>432.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>CUDGWE</name>
+    <cmt>CUDGWE</cmt>
+    <desc>CUDGWE</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.242792" lon="147.883678">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>DWYERS</name>
+    <cmt>DWYERS</cmt>
+    <desc>DWYERS</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.185833" lon="147.976667">
+    <ele>935.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>ELLIOT</name>
+    <cmt>ELLIOT</cmt>
+    <desc>ELLIOT</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.185833" lon="147.976667">
+    <ele>935.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>ELLITP</name>
+    <cmt>ELLITP</cmt>
+    <desc>ELLITP</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.383283" lon="148.181683">
+    <ele>427.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>GEHI</name>
+    <cmt>GEHI</cmt>
+    <desc>GEHI</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.059067" lon="148.039833">
+    <ele>244.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>GRGGRG</name>
+    <cmt>GRGGRG</cmt>
+    <desc>GRGGRG</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.072233" lon="147.641883">
+    <ele>439.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>GUYFOR</name>
+    <cmt>GUYFOR</cmt>
+    <desc>GUYFOR</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.265472" lon="147.873444">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>HALFWY</name>
+    <cmt>Half Way Hill</cmt>
+    <desc>Half Way Hill</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-35.685367" lon="147.320500">
+    <ele>261.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>HOLBRK</name>
+    <cmt>HOLBRK</cmt>
+    <desc>HOLBRK</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.220622" lon="148.040847">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>INDI</name>
+    <cmt>INDI</cmt>
+    <desc>INDI</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.226719" lon="148.081608">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>INDIRG</name>
+    <cmt>Indi Range</cmt>
+    <desc>Indi Range</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-35.933617" lon="147.700567">
+    <ele>230.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>JINGEL</name>
+    <cmt>JINGEL</cmt>
+    <desc>JINGEL</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.264100" lon="147.938467">
+    <ele>376.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>KANGCK</name>
+    <cmt>KANGCK</cmt>
+    <desc>KANGCK</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.216217" lon="148.109783">
+    <ele>290.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>KHANCO</name>
+    <cmt>KHANCO</cmt>
+    <desc>KHANCO</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.086533" lon="148.045583">
+    <ele>678.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>LIGHTH</name>
+    <cmt>LIGHTH</cmt>
+    <desc>LIGHTH</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.285306" lon="147.852531">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>MCNAMX</name>
+    <cmt>McNamara Crossing</cmt>
+    <desc>McNamara Crossing</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.452233" lon="148.250533">
+    <ele>1945.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>MTKOSC</name>
+    <cmt>MTKOSC</cmt>
+    <desc>MTKOSC</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.148950" lon="147.864183">
+    <ele>990.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>MTMITA</name>
+    <cmt>MTMITA</cmt>
+    <desc>MTMITA</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-35.838600" lon="147.874750">
+    <ele>550.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>MUNDER</name>
+    <cmt>MUNDER</cmt>
+    <desc>MUNDER</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.280994" lon="147.870964">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>NARIEL</name>
+    <cmt>Nariel</cmt>
+    <desc>Nariel</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.108217" lon="147.923422">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>PINEFO</name>
+    <cmt>PINEFO</cmt>
+    <desc>PINEFO</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.018894" lon="147.825228">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>PINEMT</name>
+    <cmt>PINEMT</cmt>
+    <desc>PINEMT</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.170397" lon="148.044917">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>POWER</name>
+    <cmt>Power Line Crossing</cmt>
+    <desc>Power Line Crossing</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.162061" lon="147.801856">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>ROSSL</name>
+    <cmt>RossL</cmt>
+    <desc>RossL</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.263650" lon="148.123147">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>SWAMPY</name>
+    <cmt>Swampy Plain River</cmt>
+    <desc>Swampy Plain River</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.305417" lon="147.898867">
+    <ele>426.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>THOWGL</name>
+    <cmt>THOWGL</cmt>
+    <desc>THOWGL</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.051950" lon="147.926933">
+    <ele>264.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>TINTAL</name>
+    <cmt>TINTAL</cmt>
+    <desc>TINTAL</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-35.967850" lon="148.058050">
+    <ele>276.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>TOOMA</name>
+    <cmt>TOOMA</cmt>
+    <desc>TOOMA</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.127133" lon="147.985733">
+    <ele>259.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>TOWONG</name>
+    <cmt>TOWONG</cmt>
+    <desc>TOWONG</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.220681" lon="147.890372">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>TRASH</name>
+    <cmt>TRASH</cmt>
+    <desc>TRASH</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.243086" lon="148.135525">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>TURBNS</name>
+    <cmt>TURBNS</cmt>
+    <desc>TURBNS</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.180939" lon="148.102278">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>TURNOF</name>
+    <cmt>Oak Hill Turnoff</cmt>
+    <desc>Oak Hill Turnoff</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.196939" lon="148.020297">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>UPTWNG</name>
+    <cmt>UPTWNG</cmt>
+    <desc>UPTWNG</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-35.966217" lon="147.734183">
+    <ele>224.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>WALWA</name>
+    <cmt>WALWA</cmt>
+    <desc>WALWA</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.013586" lon="147.961514">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>WELGNG</name>
+    <cmt>WELGNG</cmt>
+    <desc>WELGNG</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.112564" lon="148.090756">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>WILSPR</name>
+    <cmt>WILSPR</cmt>
+    <desc>WILSPR</desc>
+    <sym>Dot</sym>
+  </wpt>
+  <wpt lat="-36.123250" lon="147.836111">
+    <ele>0.0</ele>
+    <time>2017-12-15T01:19:17</time>
+    <name>XING27</name>
+    <cmt>Crossing 27</cmt>
+    <desc>Crossing 27</desc>
+    <sym>Dot</sym>
+  </wpt>
+</gpx>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="Flyskyhy" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<metadata>
+   <author>Flyskyhy</author>
+   <link href="http://flyskyhy.com">
+      <text>Flyskyhy</text>
+   </link>
+</metadata>
+<wpt lat="-35.852512" lon="142.781486">
+   <ele>0</ele>
+   <name>CURY</name>
+   <desc>CURY</desc>
+</wpt>
+<wpt lat="-35.999169" lon="142.913974">
+   <ele>0</ele>
+   <name>YBIR</name>
+   <desc>YBIR</desc>
+</wpt>
+<wpt lat="-35.997549" lon="143.006501">
+   <ele>0</ele>
+   <name>CHUM</name>
+   <desc>CHUM</desc>
+</wpt>
+<wpt lat="-35.809694" lon="143.005232">
+   <ele>0</ele>
+   <name>COMP</name>
+   <desc>COMP</desc>
+</wpt>
+<wpt lat="-35.720199" lon="143.112055">
+   <ele>0</ele>
+   <name>CGOA</name>
+   <desc>CGOA</desc>
+</wpt>
+<wpt lat="-35.512558" lon="142.849217">
+   <ele>0</ele>
+   <name>SLKE</name>
+   <desc>SLKE</desc>
+</wpt>
+<wpt lat="-35.193646" lon="142.939608">
+   <ele>0</ele>
+   <name>CPOK</name>
+   <desc>CPOK</desc>
+</wpt>
+<wpt lat="-34.624795" lon="143.575989">
+   <ele>0</ele>
+   <name>YBAL</name>
+   <desc>YBAL</desc>
+</wpt>
+<wpt lat="-34.407394" lon="143.613030">
+   <ele>0</ele>
+   <name>HBSH</name>
+   <desc>HBSH</desc>
+</wpt>
+<wpt lat="-33.865789" lon="143.739796">
+   <ele>0</ele>
+   <name>HATF</name>
+   <desc>HATF</desc>
+</wpt>
+<wpt lat="-32.892494" lon="144.310305">
+   <ele>0</ele>
+   <name>YIVO</name>
+   <desc>YIVO</desc>
+</wpt>
+<wpt lat="-34.530719" lon="144.833711">
+   <ele>0</ele>
+   <name>YHAY</name>
+   <desc>YHAY</desc>
+</wpt>
+<wpt lat="-31.552192" lon="147.194832">
+   <ele>0</ele>
+   <name>YNYN</name>
+   <desc>YNYN</desc>
+</wpt>
+<wpt lat="-33.283446" lon="146.371281">
+   <ele>0</ele>
+   <name>YLCG</name>
+   <desc>YLCG</desc>
+</wpt>
+<wpt lat="-32.500115" lon="144.747145">
+   <ele>0</ele>
+   <name>400</name>
+   <desc>400</desc>
+</wpt>
+<wpt lat="-35.057103" lon="144.021734">
+   <ele>0</ele>
+   <name>YMOM</name>
+   <desc>YMOM</desc>
+</wpt>
+<wpt lat="-35.815243" lon="145.587596">
+   <ele>0</ele>
+   <name>GRANT</name>
+   <desc>GRANT</desc>
+</wpt>
+<wpt lat="-33.482845" lon="148.068493">
+   <ele>0</ele>
+   <name>YLENY</name>
+   <desc>YLENY</desc>
+</wpt>
+<wpt lat="-36.815551" lon="145.350019">
+   <ele>0</ele>
+   <name>YLCS</name>
+   <desc>YLCS</desc>
+</wpt>
+<wpt lat="-32.006980" lon="141.460581">
+   <ele>0</ele>
+   <name>YBHI</name>
+   <desc>YBHI</desc>
+</wpt>
+<wpt lat="-33.385628" lon="142.573463">
+   <ele>0</ele>
+   <name>POON</name>
+   <desc>POON</desc>
+</wpt>
+<wpt lat="-35.079617" lon="142.325564">
+   <ele>0</ele>
+   <name>OYEN</name>
+   <desc>OYEN</desc>
+</wpt>
+<wpt lat="-35.376625" lon="143.541212">
+   <ele>0</ele>
+   <name>YSWH</name>
+   <desc>YSWH</desc>
+</wpt>
+<wpt lat="-35.748369" lon="143.935640">
+   <ele>0</ele>
+   <name>YKER</name>
+   <desc>YKER</desc>
+</wpt>
+<wpt lat="-35.966589" lon="144.381734">
+   <ele>0</ele>
+   <name>YGBW</name>
+   <desc>YGBW</desc>
+</wpt>
+<wpt lat="-35.313743" lon="145.168638">
+   <ele>0</ele>
+   <name>CONS</name>
+   <desc>CONS</desc>
+</wpt>
+<wpt lat="-35.278379" lon="145.173681">
+   <ele>0</ele>
+   <name>CONN</name>
+   <desc>CONN</desc>
+</wpt>
+<wpt lat="-35.184566" lon="143.331000">
+   <ele>0</ele>
+   <name>NYAW</name>
+   <desc>NYAW</desc>
+</wpt>
+<wpt lat="-35.716116" lon="142.358653">
+   <ele>0</ele>
+   <name>YHPN</name>
+   <desc>YHPN</desc>
+</wpt>
+<wpt lat="-31.538479" lon="145.796166">
+   <ele>0</ele>
+   <name>YCBA</name>
+   <desc>YCBA</desc>
+</wpt>
+<wpt lat="-31.510056" lon="145.738839">
+   <ele>0</ele>
+   <name>540</name>
+   <desc>540</desc>
+</wpt>
+<wpt lat="-35.148339" lon="142.038660">
+   <ele>0</ele>
+   <name>WALP</name>
+   <desc>WALP</desc>
+</wpt>
+<wpt lat="-35.326214" lon="140.528626">
+   <ele>0</ele>
+   <name>LAMA</name>
+   <desc>LAMA</desc>
+</wpt>
+<wpt lat="-36.310219" lon="140.788641">
+   <ele>0</ele>
+   <name>BTWN</name>
+   <desc>BTWN</desc>
+</wpt>
+<wpt lat="-36.344340" lon="140.965089">
+   <ele>0</ele>
+   <name>SAVT</name>
+   <desc>SAVT</desc>
+</wpt>
+<wpt lat="-36.309739" lon="141.646619">
+   <ele>0</ele>
+   <name>YNHL</name>
+   <desc>YNHL</desc>
+</wpt>
+<wpt lat="-36.104146" lon="140.364387">
+   <ele>0</ele>
+   <name>KETH</name>
+   <desc>KETH</desc>
+</wpt>
+<wpt lat="-36.296157" lon="142.846873">
+   <ele>0</ele>
+   <name>LTCH</name>
+   <desc>LTCH</desc>
+</wpt>
+<wpt lat="-36.360601" lon="143.004191">
+   <ele>0</ele>
+   <name>YDOD</name>
+   <desc>YDOD</desc>
+</wpt>
+<wpt lat="-35.852294" lon="143.514437">
+   <ele>0</ele>
+   <name>QTOK</name>
+   <desc>QTOK</desc>
+</wpt>
+<wpt lat="-35.869199" lon="143.797995">
+   <ele>0</ele>
+   <name>LMER</name>
+   <desc>LMER</desc>
+</wpt>
+<wpt lat="-34.643128" lon="142.771429">
+   <ele>0</ele>
+   <name>YROI</name>
+   <desc>YROI</desc>
+</wpt>
+<wpt lat="-30.039900" lon="145.951433">
+   <ele>0</ele>
+   <name>YBKE</name>
+   <desc>YBKE</desc>
+</wpt>
+<wpt lat="-33.105235" lon="146.470544">
+   <ele>0</ele>
+   <name>EUBA</name>
+   <desc>EUBA</desc>
+</wpt>
+<wpt lat="-33.994195" lon="145.717876">
+   <ele>0</ele>
+   <name>GOOL</name>
+   <desc>GOOL</desc>
+</wpt>
+<wpt lat="-35.558879" lon="143.721443">
+   <ele>0</ele>
+   <name>MYST</name>
+   <desc>MYST</desc>
+</wpt>
+<wpt lat="-35.502334" lon="143.667331">
+   <ele>0</ele>
+   <name>TRESC</name>
+   <desc>TRESC</desc>
+</wpt>
+<wpt lat="-35.454813" lon="143.624927">
+   <ele>0</ele>
+   <name>BOGA</name>
+   <desc>BOGA</desc>
+</wpt>
+<wpt lat="-34.942637" lon="143.478935">
+   <ele>0</ele>
+   <name>KYAL</name>
+   <desc>KYAL</desc>
+</wpt>
+<wpt lat="-34.932235" lon="144.763152">
+   <ele>0</ele>
+   <name>BOOR</name>
+   <desc>BOOR</desc>
+</wpt>
+<wpt lat="-34.045947" lon="145.400733">
+   <ele>0</ele>
+   <name>GUNB</name>
+   <desc>GUNB</desc>
+</wpt>
+<wpt lat="-33.491241" lon="145.524918">
+   <ele>0</ele>
+   <name>YHLS</name>
+   <desc>YHLS</desc>
+</wpt>
+<wpt lat="-33.869382" lon="144.885785">
+   <ele>0</ele>
+   <name>BOOL</name>
+   <desc>BOOL</desc>
+</wpt>
+<wpt lat="-34.131167" lon="144.761249">
+   <ele>0</ele>
+   <name>1TREE</name>
+   <desc>1TREE</desc>
+</wpt>
+<wpt lat="-38.611659" lon="142.998720">
+   <ele>0</ele>
+   <name>PCAM</name>
+   <desc>PCAM</desc>
+</wpt>
+<wpt lat="-38.362522" lon="142.262927">
+   <ele>0</ele>
+   <name>PFRY</name>
+   <desc>PFRY</desc>
+</wpt>
+<wpt lat="-38.049778" lon="140.696983">
+   <ele>0</ele>
+   <name>PMAC</name>
+   <desc>PMAC</desc>
+</wpt>
+<wpt lat="-36.979154" lon="140.727940">
+   <ele>0</ele>
+   <name>YNRC</name>
+   <desc>YNRC</desc>
+</wpt>
+<wpt lat="-37.175208" lon="139.805245">
+   <ele>0</ele>
+   <name>YRBE</name>
+   <desc>YRBE</desc>
+</wpt>
+<wpt lat="-35.252376" lon="140.945884">
+   <ele>0</ele>
+   <name>YPNN</name>
+   <desc>YPNN</desc>
+</wpt>
+<wpt lat="-36.899497" lon="145.219741">
+   <ele>0</ele>
+   <name>NLP</name>
+   <desc>NLP</desc>
+</wpt>
+<wpt lat="-36.021070" lon="144.966560">
+   <ele>0</ele>
+   <name>BRMA</name>
+   <desc>BRMA</desc>
+</wpt>
+<wpt lat="-36.627884" lon="145.714535">
+   <ele>0</ele>
+   <name>VTWN</name>
+   <desc>VTWN</desc>
+</wpt>
+</gpx>

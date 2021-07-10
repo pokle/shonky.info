@@ -1,0 +1,1304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2"  xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:kml="http://www.opengis.net/kml/2.2"    
+     xmlns:atom="http://www.w3.org/2005/Atom">
+    <Document>
+        <name><![CDATA[Corryong 2021 waypoints]]></name>
+        
+                                <atom:link href="http://www.gethome.no/stein.sorensen/"/>
+            
+                            <TimeStamp>
+                <when>2017-12-15T01:19:37Z</when>
+            </TimeStamp> 
+            
+                
+        <description><![CDATA[<br/><p> </p><p><br/>Converted using <b><a href='http://gpx2kml.com' title='Go to gpx2kml.com'>gpx2kml.com</a></b></p><br/>]]></description>
+        <visibility>1</visibility>
+        <open>1</open>
+        
+                <Style id="red">
+            <LineStyle>
+            <color>C81400FF</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_red">
+            <LineStyle>
+            <color>961400FF</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="green">
+            <LineStyle>
+            <color>C878FF00</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_green">
+            <LineStyle>
+            <color>9678FF00</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="blue">
+            <LineStyle>
+            <color>C8FF7800</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_blue">
+            <LineStyle>
+            <color>96FF7800</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="cyan">
+            <LineStyle>
+            <color>C8F0FF14</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_cyan">
+            <LineStyle>
+            <color>96F0FF14</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="orange">
+            <LineStyle>
+            <color>C81478FF</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_orange">
+            <LineStyle>
+            <color>961478FF</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="dark_green">
+            <LineStyle>
+            <color>C8008C14</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_dark_green">
+            <LineStyle>
+            <color>96008C14</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="purple">
+            <LineStyle>
+            <color>C8FF7878</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_purple">
+            <LineStyle>
+            <color>96FF7878</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="pink">
+            <LineStyle>
+            <color>C8A078F0</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_pink">
+            <LineStyle>
+            <color>96A078F0</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="brown">
+            <LineStyle>
+            <color>C8143C96</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_brown">
+            <LineStyle>
+            <color>96143C96</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+                <Style id="dark_blue">
+            <LineStyle>
+            <color>C8F01414</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        <Style id="route_dark_blue">
+            <LineStyle>
+            <color>96F01414</color>
+            <width>4</width>
+            </LineStyle>
+        </Style>
+        
+                
+        <Folder>
+            <name>Waypoints</name>
+            <description>A list of waypoints</description>
+            <visibility>1</visibility>
+            <open>0</open>
+                                                                                
+            
+            <Placemark>
+                <name>BIGARA</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - BIGARA                </description>       
+                <LookAt>
+                    <longitude>148.020958</longitude>
+                    <latitude>-36.263625</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.020958,-36.263625,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>BRADGP</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Bradneys Gap                </description>       
+                <LookAt>
+                    <longitude>148.149586</longitude>
+                    <latitude>-36.175211</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.149586,-36.175211,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>BRNBRG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - BRNBRG                </description>       
+                <LookAt>
+                    <longitude>148.051778</longitude>
+                    <latitude>-36.142867</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.051778,-36.142867,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>CLCCLC</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - CLCCLC                </description>       
+                <LookAt>
+                    <longitude>147.828883</longitude>
+                    <latitude>-36.218033</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.828883,-36.218033,329.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>CORRY</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - CORRY                </description>       
+                <LookAt>
+                    <longitude>147.891400</longitude>
+                    <latitude>-36.185000</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.891400,-36.185000,291.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>CUDG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - CUDG                </description>       
+                <LookAt>
+                    <longitude>147.770217</longitude>
+                    <latitude>-36.192283</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.770217,-36.192283,325.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>CUDGNO</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - CUDGNO                </description>       
+                <LookAt>
+                    <longitude>147.814283</longitude>
+                    <latitude>-36.096867</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.814283,-36.096867,314.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>CUDGWE</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - CUDGWE                </description>       
+                <LookAt>
+                    <longitude>147.728800</longitude>
+                    <latitude>-36.223183</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.728800,-36.223183,432.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>DWYERS</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - DWYERS                </description>       
+                <LookAt>
+                    <longitude>147.883678</longitude>
+                    <latitude>-36.242792</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.883678,-36.242792,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>ELLIOT</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - ELLIOT                </description>       
+                <LookAt>
+                    <longitude>147.976667</longitude>
+                    <latitude>-36.185833</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.976667,-36.185833,935.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>ELLITP</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - ELLITP                </description>       
+                <LookAt>
+                    <longitude>147.976667</longitude>
+                    <latitude>-36.185833</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.976667,-36.185833,935.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>GEHI</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - GEHI                </description>       
+                <LookAt>
+                    <longitude>148.181683</longitude>
+                    <latitude>-36.383283</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.181683,-36.383283,427.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>GRGGRG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - GRGGRG                </description>       
+                <LookAt>
+                    <longitude>148.039833</longitude>
+                    <latitude>-36.059067</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.039833,-36.059067,244.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>GUYFOR</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - GUYFOR                </description>       
+                <LookAt>
+                    <longitude>147.641883</longitude>
+                    <latitude>-36.072233</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.641883,-36.072233,439.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>HALFWY</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Half Way Hill                </description>       
+                <LookAt>
+                    <longitude>147.873444</longitude>
+                    <latitude>-36.265472</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.873444,-36.265472,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>HOLBRK</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - HOLBRK                </description>       
+                <LookAt>
+                    <longitude>147.320500</longitude>
+                    <latitude>-35.685367</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.320500,-35.685367,261.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>INDI</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - INDI                </description>       
+                <LookAt>
+                    <longitude>148.040847</longitude>
+                    <latitude>-36.220622</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.040847,-36.220622,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>INDIRG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Indi Range                </description>       
+                <LookAt>
+                    <longitude>148.081608</longitude>
+                    <latitude>-36.226719</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.081608,-36.226719,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>JINGEL</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - JINGEL                </description>       
+                <LookAt>
+                    <longitude>147.700567</longitude>
+                    <latitude>-35.933617</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.700567,-35.933617,230.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>KANGCK</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - KANGCK                </description>       
+                <LookAt>
+                    <longitude>147.938467</longitude>
+                    <latitude>-36.264100</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.938467,-36.264100,376.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>KHANCO</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - KHANCO                </description>       
+                <LookAt>
+                    <longitude>148.109783</longitude>
+                    <latitude>-36.216217</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.109783,-36.216217,290.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>LIGHTH</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - LIGHTH                </description>       
+                <LookAt>
+                    <longitude>148.045583</longitude>
+                    <latitude>-36.086533</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.045583,-36.086533,678.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>MCNAMX</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - McNamara Crossing                </description>       
+                <LookAt>
+                    <longitude>147.852531</longitude>
+                    <latitude>-36.285306</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.852531,-36.285306,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>MTKOSC</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - MTKOSC                </description>       
+                <LookAt>
+                    <longitude>148.250533</longitude>
+                    <latitude>-36.452233</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.250533,-36.452233,1945.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>MTMITA</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - MTMITA                </description>       
+                <LookAt>
+                    <longitude>147.864183</longitude>
+                    <latitude>-36.148950</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.864183,-36.148950,990.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>MUNDER</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - MUNDER                </description>       
+                <LookAt>
+                    <longitude>147.874750</longitude>
+                    <latitude>-35.838600</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.874750,-35.838600,550.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>NARIEL</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Nariel                </description>       
+                <LookAt>
+                    <longitude>147.870964</longitude>
+                    <latitude>-36.280994</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.870964,-36.280994,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>PINEFO</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - PINEFO                </description>       
+                <LookAt>
+                    <longitude>147.923422</longitude>
+                    <latitude>-36.108217</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.923422,-36.108217,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>PINEMT</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - PINEMT                </description>       
+                <LookAt>
+                    <longitude>147.825228</longitude>
+                    <latitude>-36.018894</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.825228,-36.018894,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>POWER</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Power Line Crossing                </description>       
+                <LookAt>
+                    <longitude>148.044917</longitude>
+                    <latitude>-36.170397</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.044917,-36.170397,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>ROSSL</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - RossL                </description>       
+                <LookAt>
+                    <longitude>147.801856</longitude>
+                    <latitude>-36.162061</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.801856,-36.162061,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>SWAMPY</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Swampy Plain River                </description>       
+                <LookAt>
+                    <longitude>148.123147</longitude>
+                    <latitude>-36.263650</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.123147,-36.263650,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>THOWGL</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - THOWGL                </description>       
+                <LookAt>
+                    <longitude>147.898867</longitude>
+                    <latitude>-36.305417</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.898867,-36.305417,426.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>TINTAL</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - TINTAL                </description>       
+                <LookAt>
+                    <longitude>147.926933</longitude>
+                    <latitude>-36.051950</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.926933,-36.051950,264.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>TOOMA</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - TOOMA                </description>       
+                <LookAt>
+                    <longitude>148.058050</longitude>
+                    <latitude>-35.967850</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.058050,-35.967850,276.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>TOWONG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - TOWONG                </description>       
+                <LookAt>
+                    <longitude>147.985733</longitude>
+                    <latitude>-36.127133</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.985733,-36.127133,259.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>TRASH</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - TRASH                </description>       
+                <LookAt>
+                    <longitude>147.890372</longitude>
+                    <latitude>-36.220681</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.890372,-36.220681,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>TURBNS</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - TURBNS                </description>       
+                <LookAt>
+                    <longitude>148.135525</longitude>
+                    <latitude>-36.243086</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.135525,-36.243086,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>TURNOF</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Oak Hill Turnoff                </description>       
+                <LookAt>
+                    <longitude>148.102278</longitude>
+                    <latitude>-36.180939</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.102278,-36.180939,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>UPTWNG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - UPTWNG                </description>       
+                <LookAt>
+                    <longitude>148.020297</longitude>
+                    <latitude>-36.196939</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.020297,-36.196939,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>WALWA</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - WALWA                </description>       
+                <LookAt>
+                    <longitude>147.734183</longitude>
+                    <latitude>-35.966217</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.734183,-35.966217,224.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>WELGNG</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - WELGNG                </description>       
+                <LookAt>
+                    <longitude>147.961514</longitude>
+                    <latitude>-36.013586</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.961514,-36.013586,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>WILSPR</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - WILSPR                </description>       
+                <LookAt>
+                    <longitude>148.090756</longitude>
+                    <latitude>-36.112564</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        148.090756,-36.112564,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                                                                        
+            
+            <Placemark>
+                <name>XING27</name>                      
+                <visibility>1</visibility>            
+                <open>0</open>                        
+                                                    
+                <TimeStamp>
+                    <when>2017-12-15T01:19:17</when>
+                </TimeStamp> 
+                                
+                <description>
+                     - Crossing 27                </description>       
+                <LookAt>
+                    <longitude>147.836111</longitude>
+                    <latitude>-36.123250</latitude>
+                    <range>500</range>
+                    <tilt>45</tilt>
+                    <heading>0</heading>
+                </LookAt>
+                <Point>
+                    <coordinates>
+                        147.836111,-36.123250,0.0                        
+                    </coordinates>
+                </Point>
+            </Placemark>
+                            
+        </Folder>
+        
+                
+                
+        <LookAt>
+            <longitude>147.7855165</longitude>            
+            <latitude>-36.0688</latitude>             
+            <altitude>0</altitude>               
+            <heading>0</heading>               
+            <tilt>45</tilt>
+            <range>55403</range>                    
+            <altitudeMode>clampToGround</altitudeMode> 
+        </LookAt>
+    </Document>
+</kml>
