@@ -3,5 +3,5 @@
 **Important** 
 This file is available on the website - add no secrets here.
 
-Deployed using https://pages.cloudflare.com/
+Deployed using https://pages.cloudflare.com/. Git push to deploy
 
