@@ -1,31 +1,64 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <img src="https://www.gravatar.com/avatar/e729800ee17549325d97ed9d108e567e" alt="Tushar's avatar">
 
-        Tushar's shonky info and some other stuff
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-        <ul>
-            <li>
-                My <a href="https://www.youtube.com/channel/UCo86_4Tr29ZQwyBHFXLuyVg">Youtube channel with Hang Gliding videos</a>
-            </li>
-            <li>Hang Gliding GPS <a href="waypoints">Waypoints</a></li>
-        </ul>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-11">
+                <h1>Tushar's shonky info and some other stuff</h1>
+            </div>
+            <div class="col-sm-1"><img class="icon"
+                    src="https://www.gravatar.com/avatar/e729800ee17549325d97ed9d108e567e" alt="Tushar's avatar"></div>
+        </div>
+
+        <div class="row">
+            <div class="card">
+                <h2>You might have come here for...</h2>
+                <ul>
+                    <li>Hang Gliding GPS <a href="waypoints">Waypoints</a></li>
+                </ul>
+
+            </div>
+        </div>
 
 
-        <br>
+        <div class="row">
 
-        <iframe id="ytplayer" type="text/html" width="640px" height="480px"
-                src="https://www.youtube.com/embed?listType=playlist&list=PLhdv9MvjeZF1p_cnMciQFT3jy6vsSRmzo&origin=shonky.info"
-                frameborder="0"></iframe>
-        <iframe id="ytplayer" type="text/html" width="640px" height="480px"
-                src="https://www.youtube.com/embed?listType=playlist&list=PLhdv9MvjeZF0DKLCDo4nmaE_YxhjK8omW&origin=shonky.info"
-                frameborder="0"></iframe>
-    
+            <div class="card">
+                <div class="section">
+                    Recent videos from my <a
+                        href="https://www.youtube.com/channel/UCo86_4Tr29ZQwyBHFXLuyVg">Youtube
+                        channel
+                    </a>
+                </div>
+                <iframe id="ytplayer1" type="text/html"
+                class="section media"
+                    src="https://www.youtube.com/embed?listType=playlist&list=PLhdv9MvjeZF1p_cnMciQFT3jy6vsSRmzo&origin=shonky.info"
+                    frameborder="1"></iframe>
 
-    </body>
+            </div>
+
+            <div class="card">
+                <div class="section">
+                    Hang Gliding videos by other creators
+                </div>
+                <iframe id="ytplayer2" type="text/html"
+                    class="section media"
+                    src="https://www.youtube.com/embed?listType=playlist&list=PLhdv9MvjeZF0DKLCDo4nmaE_YxhjK8omW&origin=shonky.info"
+                    frameborder="1"></iframe>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+    </div>
+</body>
+
 </html>
-
