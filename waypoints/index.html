@@ -16,6 +16,7 @@
                 height: 400px;
                 width: 100%;
                 margin-bottom: 20px;
+                display: none; /* Hide map initially */
             }
             .map-container {
                 margin-bottom: 20px;
@@ -28,10 +29,10 @@
         <h2>Corryong</h2>
 
         <div class="map-container">
-            <div id="map"></div>
             <button class="primary" id="load-map">
                 Show Corryong Waypoints Map
             </button>
+            <div id="map"></div>
         </div>
 
         <ul>
@@ -94,86 +95,92 @@
                 .addEventListener("click", function () {
                     this.textContent = "Loading...";
                     this.disabled = true;
+                    
+                    // Show the map container
+                    document.getElementById('map').style.display = 'block';
 
-                    // Initialize the map if it hasn't been already
-                    if (!window.map) {
-                        window.map = L.map("map").setView([-36.19, 147.89], 10); // Approximate Corryong coordinates
-                        
-                        // Add OpenStreetMap tiles
-                        L.tileLayer(
-                            "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                            {
-                                attribution:
-                                    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                            }
-                        ).addTo(window.map);
-                        
-                        // Load the KML file
-                        fetch("Corryong 2021 waypoints.kml")
-                            .then((response) => response.text())
-                            .then((kmlData) => {
-                                // Parse the KML data
-                                const parser = new DOMParser();
-                                const kml = parser.parseFromString(
-                                    kmlData,
-                                    "text/xml"
-                                );
+                    // Initialize the map
+                    window.map = L.map("map").setView([-36.19, 147.89], 10); // Approximate Corryong coordinates
+                    
+                    // Add OpenStreetMap tiles
+                    L.tileLayer(
+                        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                        {
+                            attribution:
+                                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                        }
+                    ).addTo(window.map);
+                    
+                    // Load the KML file
+                    fetch("Corryong 2021 waypoints.kml")
+                        .then((response) => response.text())
+                        .then((kmlData) => {
+                            // Parse the KML data
+                            const parser = new DOMParser();
+                            const kml = parser.parseFromString(
+                                kmlData,
+                                "text/xml"
+                            );
 
-                                // Extract waypoints from the KML file
-                                const placemarks =
-                                    kml.getElementsByTagName("Placemark");
+                            // Extract waypoints from the KML file
+                            const placemarks =
+                                kml.getElementsByTagName("Placemark");
 
-                                for (let i = 0; i < placemarks.length; i++) {
-                                    const placemark = placemarks[i];
-                                    
-                                    // Get the name from name tag (previously was n tag)
-                                    const name =
-                                        placemark.getElementsByTagName("name")[0]
-                                            ?.textContent || "Unnamed";
-                                    const desc =
-                                        placemark.getElementsByTagName(
-                                            "description"
+                            for (let i = 0; i < placemarks.length; i++) {
+                                const placemark = placemarks[i];
+                                
+                                // Get the name from name tag
+                                const name =
+                                    placemark.getElementsByTagName("name")[0]
+                                        ?.textContent || "Unnamed";
+                                const desc =
+                                    placemark.getElementsByTagName(
+                                        "description"
+                                    )[0]?.textContent || "";
+                                const point =
+                                    placemark.getElementsByTagName("Point")[0];
+
+                                if (point) {
+                                    const coords =
+                                        point.getElementsByTagName(
+                                            "coordinates"
                                         )[0]?.textContent || "";
-                                    const point =
-                                        placemark.getElementsByTagName("Point")[0];
+                                    if (coords) {
+                                        const [longitude, latitude, altitude] =
+                                            coords
+                                                .trim()
+                                                .split(",")
+                                                .map(parseFloat);
 
-                                    if (point) {
-                                        const coords =
-                                            point.getElementsByTagName(
-                                                "coordinates"
-                                            )[0]?.textContent || "";
-                                        if (coords) {
-                                            const [longitude, latitude, altitude] =
-                                                coords
-                                                    .trim()
-                                                    .split(",")
-                                                    .map(parseFloat);
-
-                                            // Create marker
-                                            const marker = L.marker([
-                                                latitude,
-                                                longitude
-                                            ])
-                                                .addTo(window.map)
-                                                .bindPopup(
-                                                    `<b>${name}</b><br>${desc}`
-                                                );
-                                        }
+                                        // Create marker
+                                        const marker = L.marker([
+                                            latitude,
+                                            longitude
+                                        ])
+                                            .addTo(window.map)
+                                            .bindPopup(
+                                                `<b>${name}</b><br>${desc}`
+                                            );
                                     }
                                 }
+                            }
 
-                                // Update button state
-                                document.getElementById("load-map").textContent =
-                                    "Map Loaded";
-                            })
-                            .catch((error) => {
-                                console.error("Error loading KML:", error);
-                                document.getElementById("load-map").textContent =
-                                    "Error Loading Map";
-                                document.getElementById("load-map").disabled =
-                                    false;
-                            });
-                    }
+                            // A brief timeout to ensure map renders properly after showing
+                            setTimeout(function() {
+                                window.map.invalidateSize();
+                            }, 100);
+
+                            // Update button state
+                            document.getElementById("load-map").textContent =
+                                "Map Loaded";
+                        })
+                        .catch((error) => {
+                            console.error("Error loading KML:", error);
+                            document.getElementById("load-map").textContent =
+                                "Error Loading Map";
+                            document.getElementById("load-map").disabled =
+                                false;
+                        });
                 });
         </script>
     </body>
