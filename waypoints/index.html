@@ -295,7 +295,7 @@
                                 const midLat = (lat1 + lat2) / 2;
                                 const midLon = (lon1 + lon2) / 2;
                                 
-                                // Create label icon
+                                // Create label icon - matching the line color (#ff4500)
                                 const distanceIcon = L.divIcon({
                                     className: 'distance-label',
                                     html: distance.toFixed(1) + ' km',
@@ -303,11 +303,12 @@
                                     iconAnchor: [40, 10]
                                 });
                                 
-                                // Create and return the marker
+                                // Create and return the marker with high z-index to stay on top
                                 return L.marker([midLat, midLon], {
                                     icon: distanceIcon,
                                     interactive: false,
-                                    keyboard: false
+                                    keyboard: false,
+                                    zIndexOffset: 1000 // Ensure distance labels stay on top
                                 }).addTo(window.map);
                             }
                             
@@ -383,10 +384,61 @@
                                     marker: marker,
                                     lat: lat,
                                     lon: lon,
-                                    name: name
+                                    name: name,
+                                    altitude: altitude
                                 });
                                 routePolylines.push(polyline);
                                 routeDistanceLabels.push(distanceLabel);
+                                
+                                // Update label styles to highlight active waypoints and dim others
+                                updateLabelStyles();
+                            }
+                            
+                            // Function to update label styles based on route
+                            function updateLabelStyles() {
+                                // If no route is active, reset all labels to normal
+                                if (!isRoutingStarted || routePoints.length === 0) {
+                                    labelMarkers.forEach((data, name) => {
+                                        // Create a new icon with the original class
+                                        const newIcon = L.divIcon({
+                                            className: 'waypoint-label',
+                                            html: data.icon.options.html,
+                                            iconSize: data.icon.options.iconSize,
+                                            iconAnchor: data.icon.options.iconAnchor
+                                        });
+                                        data.marker.setIcon(newIcon);
+                                        data.active = false;
+                                    });
+                                    return;
+                                }
+                                
+                                // Get active waypoint names
+                                const activeWaypoints = routePoints.map(point => point.name);
+                                
+                                // Update all labels
+                                labelMarkers.forEach((data, name) => {
+                                    let className;
+                                    if (activeWaypoints.includes(name)) {
+                                        // Active waypoint
+                                        className = 'waypoint-label-active';
+                                        data.active = true;
+                                        data.marker.setZIndexOffset(1000); // Move to front
+                                    } else {
+                                        // Dim non-active waypoints
+                                        className = 'waypoint-label-dimmed';
+                                        data.active = false;
+                                        data.marker.setZIndexOffset(100);
+                                    }
+                                    
+                                    // Create a new icon with the updated class
+                                    const newIcon = L.divIcon({
+                                        className: className,
+                                        html: data.icon.options.html,
+                                        iconSize: data.icon.options.iconSize,
+                                        iconAnchor: data.icon.options.iconAnchor
+                                    });
+                                    data.marker.setIcon(newIcon);
+                                });
                             }
                             
                             // Function to reset the route
@@ -420,6 +472,9 @@
                                 // Reset routing state
                                 isRoutingStarted = false;
                                 document.getElementById('route-control').style.display = 'none';
+                                
+                                // Reset all label styles
+                                updateLabelStyles();
                                 
                                 // Make sure ELLIOT circle is still visible
                                 if (elliotCircle && !window.map.hasLayer(elliotCircle)) {
