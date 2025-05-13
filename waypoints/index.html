@@ -30,6 +30,18 @@
                 padding: 1px 4px;
                 font-size: 11px;
                 white-space: nowrap;
+                cursor: pointer;
+            }
+            
+            /* Non-interactive labels (like circle radius) */
+            .waypoint-label-static {
+                background: rgba(255, 255, 255, 0.7);
+                border: none;
+                border-radius: 3px;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+                padding: 1px 4px;
+                font-size: 11px;
+                white-space: nowrap;
                 pointer-events: none;
             }
             /* Map control style */
@@ -461,7 +473,7 @@
                                             
                                             // Add a radius label
                                             const radiusLabelIcon = L.divIcon({
-                                                className: 'waypoint-label',
+                                                className: 'waypoint-label-static',
                                                 html: '5km radius (competition start)',
                                                 iconSize: [150, 20],
                                                 iconAnchor: [75, 10]
@@ -476,12 +488,16 @@
                                             }).addTo(window.map);
                                         }
                                         
-                                        // Add label
-                                        L.marker([latitude, longitude], {
+                                        // Add clickable label
+                                        const labelMarker = L.marker([latitude, longitude], {
                                             icon: labelIcon,
-                                            interactive: false,
                                             keyboard: false
                                         }).addTo(window.map);
+                                        
+                                        // Add click event to the label for route planning
+                                        labelMarker.on('click', function() {
+                                            addWaypointToRoute(dotMarker, latitude, longitude, name, altitude);
+                                        });
                                     }
                                 }
                             }
