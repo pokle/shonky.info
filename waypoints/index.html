@@ -1,13 +1,30 @@
 <html>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .map-container {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 
     <h1>Waypoints</h1>
 
     <h2>Corryong</h2>
+
+    <div class="map-container">
+        <div id="map"></div>
+        <button class="primary" id="load-map">Show Corryong Waypoints Map</button>
+    </div>
+
     <ul>
         <li><a href="Corryong 2021 waypoints OZiexplorer.wpt">Corryong 2021 waypoints OZiexplorer.wpt</a></li>
         <li><a href="Corryong 2021 waypoints.cup">Corryong 2021 waypoints.cup</a></li>
@@ -25,5 +42,61 @@
         <li><a href="TPCVictoria2021-v1.0-swapped.kml">Turn Point Challenge Victoria 2021-v1.0 - names and descriptions swapped - in KML format</a></li>
     </ul>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        document.getElementById('load-map').addEventListener('click', function() {
+            this.textContent = 'Loading...';
+            this.disabled = true;
+            
+            // Initialize the map if it hasn't been already
+            if (!window.map) {
+                window.map = L.map('map').setView([-36.19, 147.89], 10); // Approximate Corryong coordinates
+                
+                // Add OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(window.map);
+                
+                // Load the KML file
+                fetch('Corryong 2021 waypoints.kml')
+                    .then(response => response.text())
+                    .then(kmlData => {
+                        // Parse the KML data
+                        const parser = new DOMParser();
+                        const kml = parser.parseFromString(kmlData, 'text/xml');
+                        
+                        // Extract waypoints from the KML file
+                        const placemarks = kml.getElementsByTagName('Placemark');
+                        
+                        for (let i = 0; i < placemarks.length; i++) {
+                            const placemark = placemarks[i];
+                            const name = placemark.getElementsByTagName('n')[0]?.textContent || 'Unnamed';
+                            const desc = placemark.getElementsByTagName('description')[0]?.textContent || '';
+                            const point = placemark.getElementsByTagName('Point')[0];
+                            
+                            if (point) {
+                                const coords = point.getElementsByTagName('coordinates')[0]?.textContent || '';
+                                if (coords) {
+                                    const [longitude, latitude, altitude] = coords.trim().split(',').map(parseFloat);
+                                    
+                                    // Create marker
+                                    const marker = L.marker([latitude, longitude])
+                                        .addTo(window.map)
+                                        .bindPopup(`<b>${name}</b><br>${desc}`);
+                                }
+                            }
+                        }
+                        
+                        // Update button state
+                        document.getElementById('load-map').textContent = 'Map Loaded';
+                    })
+                    .catch(error => {
+                        console.error('Error loading KML:', error);
+                        document.getElementById('load-map').textContent = 'Error Loading Map';
+                        document.getElementById('load-map').disabled = false;
+                    });
+            }
+        });
+    </script>
 </body>
 </html>
