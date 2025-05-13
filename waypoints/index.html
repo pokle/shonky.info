@@ -31,6 +31,34 @@
                 font-size: 11px;
                 white-space: nowrap;
                 cursor: pointer;
+                transition: opacity 0.3s;
+            }
+            
+            /* Dimmed label when not in route */
+            .waypoint-label-dimmed {
+                background: rgba(255, 255, 255, 0.5);
+                opacity: 0.6;
+                border: none;
+                border-radius: 3px;
+                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+                padding: 1px 4px;
+                font-size: 11px;
+                white-space: nowrap;
+                cursor: pointer;
+            }
+            
+            /* Active label in route */
+            .waypoint-label-active {
+                background: rgba(255, 255, 255, 0.9);
+                border: none;
+                border-radius: 3px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+                padding: 1px 4px;
+                font-size: 11px;
+                white-space: nowrap;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 1000 !important;
             }
             
             /* Non-interactive labels (like circle radius) */
@@ -75,11 +103,13 @@
                 margin-bottom: 5px;
             }
             .distance-label {
-                background: rgba(255, 255, 255, 0.8);
-                border: 1px solid #666;
+                background: rgba(255, 255, 255, 0.9);
+                color: #ff4500;
+                border: 1px solid #ff4500;
                 border-radius: 3px;
                 padding: 2px 6px;
                 font-size: 11px;
+                font-weight: bold;
                 white-space: nowrap;
                 pointer-events: none;
                 z-index: 1000;
@@ -242,6 +272,9 @@
                             let elliotCircle = null; // 5km radius circle around ELLIOT
                             let isRoutingStarted = false;
                             
+                            // For managing label styles
+                            const labelMarkers = new Map(); // Map of name to label marker
+                            
                             // Function to calculate distance between two points in kilometers
                             function calculateDistance(lat1, lon1, lat2, lon2) {
                                 const R = 6371; // Radius of the earth in km
@@ -304,6 +337,10 @@
                                     
                                     // Update the route start display
                                     document.getElementById('route-start').textContent = name;
+                                    
+                                    // Update label styles - first dim all labels
+                                    updateLabelStyles();
+                                    
                                     return;
                                 }
                                 
@@ -488,11 +525,19 @@
                                             }).addTo(window.map);
                                         }
                                         
-                                        // Add clickable label
+                                        // Create clickable label with higher z-index to appear above other markers
                                         const labelMarker = L.marker([latitude, longitude], {
                                             icon: labelIcon,
-                                            keyboard: false
+                                            keyboard: false,
+                                            zIndexOffset: 100 // Higher than default (0)
                                         }).addTo(window.map);
+                                        
+                                        // Store reference to the label marker
+                                        labelMarkers.set(name, {
+                                            marker: labelMarker,
+                                            icon: labelIcon,
+                                            active: false
+                                        });
                                         
                                         // Add click event to the label for route planning
                                         labelMarker.on('click', function() {
