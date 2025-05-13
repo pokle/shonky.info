@@ -102,6 +102,62 @@
                 box-shadow: 0 1px 5px rgba(0,0,0,0.4);
                 margin-bottom: 5px;
             }
+            
+            .route-points-container {
+                margin: 10px 0;
+                max-height: 200px;
+                overflow-y: auto;
+                border: 1px solid #eee;
+                border-radius: 4px;
+                padding: 5px;
+            }
+            
+            .route-points-container h5 {
+                margin-top: 0;
+                margin-bottom: 8px;
+            }
+            
+            .route-point-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 4px 0;
+                border-bottom: 1px solid #eee;
+            }
+            
+            .route-point-item:last-child {
+                border-bottom: none;
+            }
+            
+            .route-point-info {
+                flex-grow: 1;
+            }
+            
+            .route-point-name {
+                font-weight: bold;
+            }
+            
+            .route-point-distance {
+                color: #ff4500;
+                font-size: 0.9em;
+            }
+            
+            .route-point-remove {
+                color: #ff4500;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 16px;
+                background: none;
+                border: none;
+                padding: 2px 8px;
+                margin-left: 5px;
+                border-radius: 3px;
+                line-height: 1;
+            }
+            
+            .route-point-remove:hover {
+                background-color: #ffeeee;
+            }
             .distance-label {
                 background: rgba(255, 69, 0, 0.75); /* #ff4500 with opacity */
                 color: white;
@@ -141,6 +197,14 @@
                 <h4>Route Planning</h4>
                 <p>Starting from: <span id="route-start"></span></p>
                 <p>Total Distance: <span id="total-distance">0.0 km</span></p>
+                
+                <div class="route-points-container">
+                    <h5>Route Points:</h5>
+                    <div id="route-points-list">
+                        <!-- Route points will be added here dynamically -->
+                    </div>
+                </div>
+                
                 <button id="reset-route" class="secondary">Start Again</button>
             </div>
         </div>
@@ -272,6 +336,7 @@
                             let routePoints = []; // To store selected waypoints for the route
                             let routePolylines = []; // To store the polylines between waypoints
                             let routeDistanceLabels = []; // To store distance labels
+                            let segmentDistances = []; // To store distance of each segment
                             let totalDistance = 0; // Total route distance
                             let elliottMarker = null; // Reference to the ELLIOT marker
                             let elliotCircle = null; // 5km radius circle around ELLIOT
@@ -348,6 +413,9 @@
                                     // Update label styles - first dim all labels
                                     updateLabelStyles();
                                     
+                                    // Initialize the route points list
+                                    updateRoutePointsList();
+                                    
                                     return;
                                 }
                                 
@@ -358,6 +426,9 @@
                                 const segmentDistance = calculateDistance(
                                     prevPoint.lat, prevPoint.lon, lat, lon
                                 );
+                                
+                                // Store the segment distance
+                                segmentDistances.push(segmentDistance);
                                 
                                 // Update total distance
                                 totalDistance += segmentDistance;
@@ -398,6 +469,9 @@
                                 
                                 // Update label styles to highlight active waypoints and dim others
                                 updateLabelStyles();
+                                
+                                // Update the route points list in the UI
+                                updateRoutePointsList();
                             }
                             
                             // Function to update label styles based on route
@@ -447,6 +521,146 @@
                                 });
                             }
                             
+                            // Function to update the route points list in the UI
+                            function updateRoutePointsList() {
+                                const routeListElement = document.getElementById('route-points-list');
+                                routeListElement.innerHTML = '';
+                                
+                                if (routePoints.length === 0) {
+                                    routeListElement.innerHTML = '<div class="route-point-item">No points in route yet</div>';
+                                    return;
+                                }
+                                
+                                // Add each point to the list
+                                routePoints.forEach((point, index) => {
+                                    const pointElement = document.createElement('div');
+                                    pointElement.className = 'route-point-item';
+                                    
+                                    const infoElement = document.createElement('div');
+                                    infoElement.className = 'route-point-info';
+                                    
+                                    const nameElement = document.createElement('span');
+                                    nameElement.className = 'route-point-name';
+                                    nameElement.textContent = point.name;
+                                    
+                                    infoElement.appendChild(nameElement);
+                                    
+                                    // Add distance info if not the first point
+                                    if (index > 0) {
+                                        const distElement = document.createElement('div');
+                                        distElement.className = 'route-point-distance';
+                                        distElement.textContent = `+${segmentDistances[index-1].toFixed(1)} km`;
+                                        infoElement.appendChild(distElement);
+                                    }
+                                    
+                                    pointElement.appendChild(infoElement);
+                                    
+                                    // Add remove button
+                                    const removeButton = document.createElement('button');
+                                    removeButton.className = 'route-point-remove';
+                                    removeButton.innerHTML = '&times;';  // HTML entity for multiplication sign/X
+                                    removeButton.setAttribute('title', 'Remove point');
+                                    removeButton.setAttribute('data-index', index);
+                                    removeButton.addEventListener('click', function() {
+                                        removeRoutePoint(index);
+                                    });
+                                    
+                                    pointElement.appendChild(removeButton);
+                                    routeListElement.appendChild(pointElement);
+                                });
+                            }
+                            
+                            // Function to remove a point from the route
+                            function removeRoutePoint(index) {
+                                // Ignore if route is empty
+                                if (routePoints.length === 0) return;
+                                
+                                // Can't remove first point if it's the only one
+                                if (routePoints.length === 1) {
+                                    resetRoute();
+                                    return;
+                                }
+                                
+                                // Get the point to remove
+                                const pointToRemove = routePoints[index];
+                                
+                                // Reset that point's marker style
+                                pointToRemove.marker.setStyle({
+                                    radius: 4,
+                                    fillColor: '#fff',
+                                    color: '#000',
+                                    weight: 1,
+                                    opacity: 1,
+                                    fillOpacity: 1
+                                });
+                                
+                                // Remove the point from the route
+                                routePoints.splice(index, 1);
+                                
+                                // If we're removing the first point, we need special handling
+                                if (index === 0) {
+                                    // Update the starting point display
+                                    document.getElementById('route-start').textContent = routePoints[0].name;
+                                }
+                                
+                                // Remove all polylines and distance labels from map and rebuild
+                                routePolylines.forEach(polyline => window.map.removeLayer(polyline));
+                                routeDistanceLabels.forEach(label => window.map.removeLayer(label));
+                                
+                                // Clear arrays
+                                routePolylines = [];
+                                routeDistanceLabels = [];
+                                segmentDistances = [];
+                                
+                                // Reset total distance and recalculate
+                                totalDistance = 0;
+                                
+                                // Rebuild the route connections
+                                for (let i = 1; i < routePoints.length; i++) {
+                                    const prevPoint = routePoints[i-1];
+                                    const currPoint = routePoints[i];
+                                    
+                                    // Calculate distance between these points
+                                    const segmentDistance = calculateDistance(
+                                        prevPoint.lat, prevPoint.lon, currPoint.lat, currPoint.lon
+                                    );
+                                    
+                                    // Store the segment distance
+                                    segmentDistances.push(segmentDistance);
+                                    
+                                    // Add to total distance
+                                    totalDistance += segmentDistance;
+                                    
+                                    // Create a line between points
+                                    const polyline = L.polyline([
+                                        [prevPoint.lat, prevPoint.lon],
+                                        [currPoint.lat, currPoint.lon]
+                                    ], {
+                                        color: '#ff4500',
+                                        weight: 3,
+                                        opacity: 0.7
+                                    }).addTo(window.map);
+                                    
+                                    // Add distance label
+                                    const distLabel = createDistanceLabel(
+                                        prevPoint.lat, prevPoint.lon, currPoint.lat, currPoint.lon, segmentDistance
+                                    );
+                                    
+                                    // Save to arrays
+                                    routePolylines.push(polyline);
+                                    routeDistanceLabels.push(distLabel);
+                                }
+                                
+                                // Update total distance display
+                                document.getElementById('total-distance').textContent = totalDistance.toFixed(1) + ' km';
+                                
+                                // Update label styles
+                                updateLabelStyles();
+                                
+                                // Update the route points list in the UI
+                                updateRoutePointsList();
+                            }
+                            
                             // Function to reset the route
                             function resetRoute() {
                                 // Remove polylines and distance labels from map
@@ -469,6 +683,7 @@
                                 routePoints = [];
                                 routePolylines = [];
                                 routeDistanceLabels = [];
+                                segmentDistances = [];
                                 
                                 // Reset total distance
                                 totalDistance = 0;
@@ -481,6 +696,9 @@
                                 
                                 // Reset all label styles
                                 updateLabelStyles();
+                                
+                                // Update the route points list
+                                updateRoutePointsList();
                                 
                                 // Make sure ELLIOT circle is still visible
                                 if (elliotCircle && !window.map.hasLayer(elliotCircle)) {
