@@ -103,8 +103,8 @@
                 margin-bottom: 5px;
             }
             .distance-label {
-                background: rgba(255, 255, 255, 0.9);
-                color: #ff4500;
+                background: rgba(255, 69, 0, 0.75); /* #ff4500 with opacity */
+                color: white;
                 border: 1px solid #ff4500;
                 border-radius: 3px;
                 padding: 2px 6px;
@@ -113,6 +113,11 @@
                 white-space: nowrap;
                 pointer-events: none;
                 z-index: 1000;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 50px;
             }
             .selected-waypoint {
                 fill: #ff4500;
@@ -296,11 +301,12 @@
                                 const midLon = (lon1 + lon2) / 2;
                                 
                                 // Create label icon - matching the line color (#ff4500)
+                                const distText = distance.toFixed(1) + ' km';
                                 const distanceIcon = L.divIcon({
                                     className: 'distance-label',
-                                    html: distance.toFixed(1) + ' km',
-                                    iconSize: [80, 20],
-                                    iconAnchor: [40, 10]
+                                    html: `<div style="width:100%;text-align:center;">${distText}</div>`,
+                                    iconSize: [80, 24],
+                                    iconAnchor: [40, 12]
                                 });
                                 
                                 // Create and return the marker with high z-index to stay on top
