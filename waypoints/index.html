@@ -227,6 +227,7 @@
                             let routeDistanceLabels = []; // To store distance labels
                             let totalDistance = 0; // Total route distance
                             let elliottMarker = null; // Reference to the ELLIOT marker
+                            let elliotCircle = null; // 5km radius circle around ELLIOT
                             let isRoutingStarted = false;
                             
                             // Function to calculate distance between two points in kilometers
@@ -370,6 +371,11 @@
                                 // Reset routing state
                                 isRoutingStarted = false;
                                 document.getElementById('route-control').style.display = 'none';
+                                
+                                // Make sure ELLIOT circle is still visible
+                                if (elliotCircle && !window.map.hasLayer(elliotCircle)) {
+                                    elliotCircle.addTo(window.map);
+                                }
                             }
                             
                             // Set up reset button event listener
@@ -442,6 +448,32 @@
                                         // Save reference to ELLIOT marker
                                         if (name === "ELLIOT") {
                                             elliottMarker = dotMarker;
+                                            
+                                            // Add a 5km radius circle around ELLIOT (competition start circle)
+                                            elliotCircle = L.circle([latitude, longitude], {
+                                                radius: 5000, // 5km in meters
+                                                color: '#3388ff',
+                                                fillColor: '#3388ff',
+                                                fillOpacity: 0.1,
+                                                weight: 2,
+                                                dashArray: '5,5'
+                                            }).addTo(window.map);
+                                            
+                                            // Add a radius label
+                                            const radiusLabelIcon = L.divIcon({
+                                                className: 'waypoint-label',
+                                                html: '5km radius (competition start)',
+                                                iconSize: [150, 20],
+                                                iconAnchor: [75, 10]
+                                            });
+                                            
+                                            // Position label slightly north of the circle edge
+                                            const labelLat = latitude + (5 / 111.32); // ~5km north
+                                            L.marker([labelLat, longitude], {
+                                                icon: radiusLabelIcon,
+                                                interactive: false,
+                                                keyboard: false
+                                            }).addTo(window.map);
                                         }
                                         
                                         // Add label
