@@ -92,7 +92,7 @@
             <div id="map"></div>
             <div class="route-planning-control" id="route-control" style="display: none;">
                 <h4>Route Planning</h4>
-                <p>Starting from: <span id="route-start">ELLIOT</span></p>
+                <p>Starting from: <span id="route-start"></span></p>
                 <p>Total Distance: <span id="total-distance">0.0 km</span></p>
                 <button id="reset-route" class="secondary">Start Again</button>
             </div>
@@ -266,15 +266,9 @@
                             }
                             
                             // Function to add a waypoint to the route
-                            function addWaypointToRoute(marker, lat, lon, name) {
+                            function addWaypointToRoute(marker, lat, lon, name, altitude) {
                                 // If this is the first point or routing hasn't started yet
                                 if (routePoints.length === 0 || !isRoutingStarted) {
-                                    // If the name isn't ELLIOT and we haven't started routing, ignore it
-                                    if (name !== "ELLIOT" && !isRoutingStarted) {
-                                        alert("Route must start from ELLIOT. Please click on ELLIOT first.");
-                                        return;
-                                    }
-                                    
                                     // Start the route
                                     isRoutingStarted = true;
                                     document.getElementById('route-control').style.display = 'block';
@@ -291,7 +285,8 @@
                                         marker: marker,
                                         lat: lat,
                                         lon: lon,
-                                        name: name
+                                        name: name,
+                                        altitude: altitude
                                     });
                                     
                                     // Update the route start display
@@ -370,7 +365,7 @@
                                 // Reset total distance
                                 totalDistance = 0;
                                 document.getElementById('total-distance').textContent = '0.0 km';
-                                document.getElementById('route-start').textContent = 'ELLIOT';
+                                document.getElementById('route-start').textContent = '';
                                 
                                 // Reset routing state
                                 isRoutingStarted = false;
@@ -406,12 +401,15 @@
                                                 .split(",")
                                                 .map(parseFloat);
                                         
+                                        // Format altitude display if available
+                                        const altDisplay = altitude && altitude > 0 ? ` (${Math.round(altitude)}m)` : '';
+                                        
                                         // Create label icon
                                         const labelIcon = L.divIcon({
                                             className: 'waypoint-label',
-                                            html: name,
-                                            iconSize: [100, 20],
-                                            iconAnchor: [50, 10]
+                                            html: `${name}${altDisplay}`,
+                                            iconSize: [130, 20],
+                                            iconAnchor: [65, 10]
                                         });
 
                                         // Create simple dot marker instead of X
@@ -424,7 +422,7 @@
                                             fillOpacity: 1
                                         })
                                         .addTo(window.map)
-                                        .bindPopup(`<b>${name}</b><br>${desc}`);
+                                        .bindPopup(`<b>${name}</b>${altDisplay}<br>${desc}`);
                                         
                                         // Store waypoint data for route planning
                                         waypointMap.set(name, {
@@ -432,12 +430,13 @@
                                             lat: latitude,
                                             lon: longitude,
                                             name: name,
-                                            desc: desc
+                                            desc: desc,
+                                            altitude: altitude
                                         });
                                         
                                         // Add click event for route planning
                                         dotMarker.on('click', function() {
-                                            addWaypointToRoute(dotMarker, latitude, longitude, name);
+                                            addWaypointToRoute(dotMarker, latitude, longitude, name, altitude);
                                         });
                                         
                                         // Save reference to ELLIOT marker
