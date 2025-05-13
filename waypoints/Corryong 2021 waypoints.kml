@@ -388,7 +388,9 @@
                 </TimeStamp>
 
                 <description>
-                     - ELLIOT                </description>
+                     - ELLIOT
+                     - ELLITP
+                </description>
                 <LookAt>
                     <longitude>147.976667</longitude>
                     <latitude>-36.185833</latitude>
@@ -402,33 +404,6 @@
                     </coordinates>
                 </Point>
             </Placemark>
-
-
-            <Placemark>
-                <name>ELLITP</name>
-                <visibility>1</visibility>
-                <open>0</open>
-
-                <TimeStamp>
-                    <when>2017-12-15T01:19:17</when>
-                </TimeStamp>
-
-                <description>
-                     - ELLITP                </description>
-                <LookAt>
-                    <longitude>147.976667</longitude>
-                    <latitude>-36.185833</latitude>
-                    <range>500</range>
-                    <tilt>45</tilt>
-                    <heading>0</heading>
-                </LookAt>
-                <Point>
-                    <coordinates>
-                        147.976667,-36.185833,935.0
-                    </coordinates>
-                </Point>
-            </Placemark>
-
 
             <Placemark>
                 <name>GEHI</name>

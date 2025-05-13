@@ -54,6 +54,30 @@
                     1px 1px 0 #000;
                 font-size: 16px;
             }
+            /* Route planning controls */
+            .route-planning-control {
+                background: white;
+                padding: 10px;
+                border-radius: 4px;
+                box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+                margin-bottom: 5px;
+            }
+            .distance-label {
+                background: rgba(255, 255, 255, 0.8);
+                border: 1px solid #666;
+                border-radius: 3px;
+                padding: 2px 6px;
+                font-size: 11px;
+                white-space: nowrap;
+                pointer-events: none;
+                z-index: 1000;
+            }
+            .selected-waypoint {
+                fill: #ff4500;
+                stroke: #000;
+                stroke-width: 1;
+                r: 6;
+            }
         </style>
     </head>
     <body>
@@ -66,6 +90,12 @@
                 Show Corryong Waypoints Map
             </button>
             <div id="map"></div>
+            <div class="route-planning-control" id="route-control" style="display: none;">
+                <h4>Route Planning</h4>
+                <p>Starting from: <span id="route-start">ELLIOT</span></p>
+                <p>Total Distance: <span id="total-distance">0.0 km</span></p>
+                <button id="reset-route" class="secondary">Start Again</button>
+            </div>
         </div>
 
         <ul>
@@ -189,6 +219,166 @@
                             // Extract waypoints from the KML file
                             const placemarks =
                                 kml.getElementsByTagName("Placemark");
+                            
+                            // Initialize route planning variables
+                            const waypointMap = new Map(); // To store waypoints by name
+                            let routePoints = []; // To store selected waypoints for the route
+                            let routePolylines = []; // To store the polylines between waypoints
+                            let routeDistanceLabels = []; // To store distance labels
+                            let totalDistance = 0; // Total route distance
+                            let elliottMarker = null; // Reference to the ELLIOT marker
+                            let isRoutingStarted = false;
+                            
+                            // Function to calculate distance between two points in kilometers
+                            function calculateDistance(lat1, lon1, lat2, lon2) {
+                                const R = 6371; // Radius of the earth in km
+                                const dLat = (lat2 - lat1) * Math.PI / 180;
+                                const dLon = (lon2 - lon1) * Math.PI / 180;
+                                const a = 
+                                    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                                    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * 
+                                    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                                const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+                                const distance = R * c; // Distance in km
+                                return distance;
+                            }
+                            
+                            // Function to create distance label
+                            function createDistanceLabel(lat1, lon1, lat2, lon2, distance) {
+                                // Calculate midpoint for label placement
+                                const midLat = (lat1 + lat2) / 2;
+                                const midLon = (lon1 + lon2) / 2;
+                                
+                                // Create label icon
+                                const distanceIcon = L.divIcon({
+                                    className: 'distance-label',
+                                    html: distance.toFixed(1) + ' km',
+                                    iconSize: [80, 20],
+                                    iconAnchor: [40, 10]
+                                });
+                                
+                                // Create and return the marker
+                                return L.marker([midLat, midLon], {
+                                    icon: distanceIcon,
+                                    interactive: false,
+                                    keyboard: false
+                                }).addTo(window.map);
+                            }
+                            
+                            // Function to add a waypoint to the route
+                            function addWaypointToRoute(marker, lat, lon, name) {
+                                // If this is the first point or routing hasn't started yet
+                                if (routePoints.length === 0 || !isRoutingStarted) {
+                                    // If the name isn't ELLIOT and we haven't started routing, ignore it
+                                    if (name !== "ELLIOT" && !isRoutingStarted) {
+                                        alert("Route must start from ELLIOT. Please click on ELLIOT first.");
+                                        return;
+                                    }
+                                    
+                                    // Start the route
+                                    isRoutingStarted = true;
+                                    document.getElementById('route-control').style.display = 'block';
+                                    
+                                    // Highlight the marker
+                                    marker.setStyle({
+                                        radius: 6,
+                                        fillColor: '#ff4500',
+                                        color: '#000'
+                                    });
+                                    
+                                    // Add the point to our route
+                                    routePoints.push({
+                                        marker: marker,
+                                        lat: lat,
+                                        lon: lon,
+                                        name: name
+                                    });
+                                    
+                                    // Update the route start display
+                                    document.getElementById('route-start').textContent = name;
+                                    return;
+                                }
+                                
+                                // Get the previous point
+                                const prevPoint = routePoints[routePoints.length - 1];
+                                
+                                // Calculate distance
+                                const segmentDistance = calculateDistance(
+                                    prevPoint.lat, prevPoint.lon, lat, lon
+                                );
+                                
+                                // Update total distance
+                                totalDistance += segmentDistance;
+                                document.getElementById('total-distance').textContent = totalDistance.toFixed(1) + ' km';
+                                
+                                // Create a line from the previous point to this one
+                                const polyline = L.polyline([
+                                    [prevPoint.lat, prevPoint.lon],
+                                    [lat, lon]
+                                ], {
+                                    color: '#ff4500',
+                                    weight: 3,
+                                    opacity: 0.7
+                                }).addTo(window.map);
+                                
+                                // Add distance label
+                                const distanceLabel = createDistanceLabel(
+                                    prevPoint.lat, prevPoint.lon, lat, lon, segmentDistance
+                                );
+                                
+                                // Highlight the marker
+                                marker.setStyle({
+                                    radius: 6,
+                                    fillColor: '#ff4500',
+                                    color: '#000'
+                                });
+                                
+                                // Store the new point, polyline, and label
+                                routePoints.push({
+                                    marker: marker,
+                                    lat: lat,
+                                    lon: lon,
+                                    name: name
+                                });
+                                routePolylines.push(polyline);
+                                routeDistanceLabels.push(distanceLabel);
+                            }
+                            
+                            // Function to reset the route
+                            function resetRoute() {
+                                // Remove polylines and distance labels from map
+                                routePolylines.forEach(polyline => window.map.removeLayer(polyline));
+                                routeDistanceLabels.forEach(label => window.map.removeLayer(label));
+                                
+                                // Reset marker styles
+                                routePoints.forEach(point => {
+                                    point.marker.setStyle({
+                                        radius: 4,
+                                        fillColor: '#fff',
+                                        color: '#000',
+                                        weight: 1,
+                                        opacity: 1,
+                                        fillOpacity: 1
+                                    });
+                                });
+                                
+                                // Clear arrays
+                                routePoints = [];
+                                routePolylines = [];
+                                routeDistanceLabels = [];
+                                
+                                // Reset total distance
+                                totalDistance = 0;
+                                document.getElementById('total-distance').textContent = '0.0 km';
+                                document.getElementById('route-start').textContent = 'ELLIOT';
+                                
+                                // Reset routing state
+                                isRoutingStarted = false;
+                                document.getElementById('route-control').style.display = 'none';
+                            }
+                            
+                            // Set up reset button event listener
+                            document.getElementById('reset-route').addEventListener('click', resetRoute);
 
                             for (let i = 0; i < placemarks.length; i++) {
                                 const placemark = placemarks[i];
@@ -235,6 +425,25 @@
                                         })
                                         .addTo(window.map)
                                         .bindPopup(`<b>${name}</b><br>${desc}`);
+                                        
+                                        // Store waypoint data for route planning
+                                        waypointMap.set(name, {
+                                            marker: dotMarker,
+                                            lat: latitude,
+                                            lon: longitude,
+                                            name: name,
+                                            desc: desc
+                                        });
+                                        
+                                        // Add click event for route planning
+                                        dotMarker.on('click', function() {
+                                            addWaypointToRoute(dotMarker, latitude, longitude, name);
+                                        });
+                                        
+                                        // Save reference to ELLIOT marker
+                                        if (name === "ELLIOT") {
+                                            elliottMarker = dotMarker;
+                                        }
                                         
                                         // Add label
                                         L.marker([latitude, longitude], {
