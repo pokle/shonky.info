@@ -23,54 +23,73 @@
             }
             /* Style for waypoint labels */
             .waypoint-label {
-                background: rgba(255, 255, 255, 0.7);
+                background: transparent;
                 border: none;
-                border-radius: 3px;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.2);
                 padding: 1px 4px;
                 font-size: 11px;
+                font-weight: bold;
                 white-space: nowrap;
                 cursor: pointer;
+                color: black;
+                text-shadow: 
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
                 transition: opacity 0.3s;
             }
             
             /* Dimmed label when not in route */
             .waypoint-label-dimmed {
-                background: rgba(255, 255, 255, 0.5);
-                opacity: 0.6;
+                background: transparent;
+                opacity: 0.7;
                 border: none;
-                border-radius: 3px;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.1);
                 padding: 1px 4px;
                 font-size: 11px;
+                font-weight: bold;
                 white-space: nowrap;
                 cursor: pointer;
+                color: black;
+                text-shadow: 
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
             }
             
             /* Active label in route */
             .waypoint-label-active {
-                background: rgba(255, 255, 255, 0.9);
+                background: transparent;
                 border: none;
-                border-radius: 3px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.3);
                 padding: 1px 4px;
-                font-size: 11px;
-                white-space: nowrap;
+                font-size: 12px;
                 font-weight: bold;
+                white-space: nowrap;
                 cursor: pointer;
+                color: #ff4500;
+                text-shadow: 
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
                 z-index: 1000 !important;
             }
             
             /* Non-interactive labels (like circle radius) */
             .waypoint-label-static {
-                background: rgba(255, 255, 255, 0.7);
+                background: transparent;
                 border: none;
-                border-radius: 3px;
-                box-shadow: 0 1px 2px rgba(0,0,0,0.2);
                 padding: 1px 4px;
                 font-size: 11px;
+                font-weight: bold;
                 white-space: nowrap;
                 pointer-events: none;
+                color: #3388ff;
+                text-shadow: 
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
             }
             /* Map control style */
             .map-type-control {
@@ -159,21 +178,19 @@
                 background-color: #ffeeee;
             }
             .distance-label {
-                background: rgba(255, 69, 0, 0.75); /* #ff4500 with opacity */
-                color: white;
-                border: 1px solid #ff4500;
-                border-radius: 3px;
+                background: transparent;
+                color: #ff4500;
                 padding: 2px 6px;
                 font-size: 11px;
                 font-weight: bold;
                 white-space: nowrap;
                 pointer-events: none;
                 z-index: 1000;
-                text-align: center;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-width: 50px;
+                text-shadow: 
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
             }
             .selected-waypoint {
                 fill: #ff4500;
@@ -369,9 +386,9 @@
                                 const distText = distance.toFixed(1) + ' km';
                                 const distanceIcon = L.divIcon({
                                     className: 'distance-label',
-                                    html: `<div style="width:100%;text-align:center;">${distText}</div>`,
-                                    iconSize: [80, 24],
-                                    iconAnchor: [40, 12]
+                                    html: distText,
+                                    iconSize: null, // Auto-size based on content
+                                    iconAnchor: [0, 12] // Anchored at the left of the text
                                 });
                                 
                                 // Create and return the marker with high z-index to stay on top
@@ -738,12 +755,12 @@
                                         // Format altitude display if available
                                         const altDisplay = altitude && altitude > 0 ? ` (${Math.round(altitude)}m)` : '';
                                         
-                                        // Create label icon
+                                        // Create label icon that auto-sizes to content
                                         const labelIcon = L.divIcon({
                                             className: 'waypoint-label',
                                             html: `${name}${altDisplay}`,
-                                            iconSize: [130, 20],
-                                            iconAnchor: [65, 10]
+                                            iconSize: null, // Auto-size based on content
+                                            iconAnchor: [0, 10] // Anchored at the bottom-left of the text
                                         });
 
                                         // Create simple dot marker instead of X
@@ -791,8 +808,8 @@
                                             const radiusLabelIcon = L.divIcon({
                                                 className: 'waypoint-label-static',
                                                 html: '5km radius (competition start)',
-                                                iconSize: [150, 20],
-                                                iconAnchor: [75, 10]
+                                                iconSize: null, // Auto-size based on content
+                                                iconAnchor: [0, 10] // Anchored at the bottom-left of the text
                                             });
                                             
                                             // Position label slightly north of the circle edge
