@@ -250,6 +250,14 @@
                     </div>
                 </div>
                 
+                <div id="share-route-container" style="margin: 10px 0;">
+                    <h5>Share this route:</h5>
+                    <div style="display: flex;">
+                        <input type="text" id="share-url" readonly style="flex-grow: 1; margin-right: 5px;" />
+                        <button id="copy-url" class="primary" style="white-space: nowrap;">Copy</button>
+                    </div>
+                </div>
+                
                 <button id="reset-route" class="secondary">Start Again</button>
             </div>
         </div>
@@ -528,6 +536,9 @@
                                 
                                 // Update the route points list in the UI
                                 updateRoutePointsList();
+                                
+                                // Update URL with the new route
+                                updateRouteInUrl();
                             }
                             
                             // Function to update label styles based on route
@@ -723,10 +734,94 @@
                                 
                                 // Update the route points list in the UI
                                 updateRoutePointsList();
+                                
+                                // Update URL with the new route
+                                updateRouteInUrl();
                             }
                             
-                            // Function to reset the route
-                            function resetRoute() {
+                            // Function to convert route to URL hash
+                            function updateRouteInUrl() {
+                                if (routePoints.length === 0) {
+                                    // Clear route parameter if no points
+                                    if (window.location.hash.includes('route=')) {
+                                        // Remove just the route parameter, preserve other hash parameters if any
+                                        let hashParts = window.location.hash.slice(1).split('&');
+                                        hashParts = hashParts.filter(part => !part.startsWith('route='));
+                                        window.location.hash = hashParts.length > 0 ? hashParts.join('&') : '';
+                                    }
+                                    
+                                    // Hide share container or clear the field
+                                    const shareUrlField = document.getElementById('share-url');
+                                    if (shareUrlField) {
+                                        shareUrlField.value = '';
+                                    }
+                                    return;
+                                }
+                                
+                                // Get waypoint names from the route
+                                const waypointNames = routePoints.map(point => encodeURIComponent(point.name));
+                                
+                                // Create route parameter
+                                const routeParam = `route=${waypointNames.join(',')}`;
+                                
+                                // Get existing hash parts excluding route
+                                let hashParts = window.location.hash.slice(1).split('&').filter(part => !part.startsWith('route='));
+                                
+                                // Add route parameter
+                                hashParts.push(routeParam);
+                                
+                                // Update URL without triggering page reload
+                                const newHash = hashParts.join('&');
+                                window.location.hash = newHash;
+                                
+                                // Update the share URL field
+                                const shareUrlField = document.getElementById('share-url');
+                                if (shareUrlField) {
+                                    // Create a full absolute URL for sharing
+                                    const baseUrl = window.location.href.split('#')[0];
+                                    shareUrlField.value = `${baseUrl}#${newHash}`;
+                                }
+                            }
+                            
+                            // Function to read route from URL hash
+                            function loadRouteFromUrl() {
+                                if (!window.location.hash) return false;
+                                
+                                const hashParts = window.location.hash.slice(1).split('&');
+                                const routePart = hashParts.find(part => part.startsWith('route='));
+                                
+                                if (!routePart) return false;
+                                
+                                // Extract waypoint names
+                                const routeParam = routePart.replace('route=', '');
+                                if (!routeParam) return false;
+                                
+                                const waypointNames = routeParam.split(',').map(name => decodeURIComponent(name));
+                                
+                                // Reset any existing route first
+                                silentResetRoute();
+                                
+                                // Load each waypoint in order
+                                let loadedAnyPoint = false;
+                                waypointNames.forEach(name => {
+                                    const waypointData = waypointMap.get(name);
+                                    if (waypointData) {
+                                        addWaypointToRoute(
+                                            waypointData.marker, 
+                                            waypointData.lat, 
+                                            waypointData.lon, 
+                                            waypointData.name, 
+                                            waypointData.altitude
+                                        );
+                                        loadedAnyPoint = true;
+                                    }
+                                });
+                                
+                                return loadedAnyPoint;
+                            }
+                            
+                            // Silent reset without updating URL (to prevent loops)
+                            function silentResetRoute() {
                                 // Remove polylines and distance labels from map
                                 routePolylines.forEach(polyline => window.map.removeLayer(polyline));
                                 routeDistanceLabels.forEach(label => window.map.removeLayer(label));
@@ -768,6 +863,13 @@
                                 if (elliotCircle && !window.map.hasLayer(elliotCircle)) {
                                     elliotCircle.addTo(window.map);
                                 }
+                            }
+                            
+                            // Function to reset the route
+                            function resetRoute() {
+                                silentResetRoute();
+                                // Also update URL to remove route
+                                updateRouteInUrl();
                             }
                             
                             // Set up reset button event listener
@@ -914,7 +1016,48 @@
                             // A brief timeout to ensure map renders properly after showing
                             setTimeout(function() {
                                 window.map.invalidateSize();
+                                
+                                // Try to load route from URL hash if present
+                                loadRouteFromUrl();
                             }, 100);
+
+                            // Set up copy URL button functionality
+                            const copyUrlButton = document.getElementById('copy-url');
+                            if (copyUrlButton) {
+                                copyUrlButton.addEventListener('click', function() {
+                                    const shareUrlField = document.getElementById('share-url');
+                                    if (shareUrlField && shareUrlField.value) {
+                                        // Select the text
+                                        shareUrlField.select();
+                                        shareUrlField.setSelectionRange(0, 99999); // For mobile devices
+                                        
+                                        // Copy to clipboard
+                                        navigator.clipboard.writeText(shareUrlField.value)
+                                            .then(() => {
+                                                // Provide visual feedback that copy was successful
+                                                const originalText = copyUrlButton.textContent;
+                                                copyUrlButton.textContent = 'Copied!';
+                                                setTimeout(() => {
+                                                    copyUrlButton.textContent = originalText;
+                                                }, 2000);
+                                            })
+                                            .catch(err => {
+                                                console.error('Failed to copy URL: ', err);
+                                                // Fallback for older browsers
+                                                try {
+                                                    document.execCommand('copy');
+                                                    const originalText = copyUrlButton.textContent;
+                                                    copyUrlButton.textContent = 'Copied!';
+                                                    setTimeout(() => {
+                                                        copyUrlButton.textContent = originalText;
+                                                    }, 2000);
+                                                } catch (e) {
+                                                    console.error('Fallback copy failed: ', e);
+                                                }
+                                            });
+                                    }
+                                });
+                            }
 
                             // Remove the load button entirely
                             document.getElementById("load-map").remove();
