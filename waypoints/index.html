@@ -16,7 +16,7 @@
                 height: 400px;
                 width: 100%;
                 margin-bottom: 20px;
-                display: none; /* Hide map initially */
+                display: block; /* Always show map */
             }
             .map-container {
                 margin-bottom: 20px;
@@ -234,9 +234,6 @@
         <h2>Corryong</h2>
 
         <div class="map-container">
-            <button class="primary" id="load-map">
-                Show Corryong Waypoints Map
-            </button>
             <div id="map"></div>
             <div class="route-planning-control" id="route-control" style="display: none;">
                 <h4>Route Planning</h4>
@@ -317,17 +314,10 @@
             crossorigin=""
         ></script>
         <script>
-            document
-                .getElementById("load-map")
-                .addEventListener("click", function () {
-                    this.textContent = "Loading...";
-                    this.disabled = true;
-                    
-                    // Show the map container
-                    document.getElementById('map').style.display = 'block';
-
-                    // Initialize the map
-                    window.map = L.map("map").setView([-36.19, 147.89], 10); // Approximate Corryong coordinates
+            // Initialize map when the page loads
+            document.addEventListener("DOMContentLoaded", function() {
+                // Initialize the map
+                window.map = L.map("map").setView([-36.19, 147.89], 10); // Approximate Corryong coordinates
                     
                     // Define base map layers
                     const satelliteLayer = L.tileLayer(
@@ -1058,17 +1048,9 @@
                                     }
                                 });
                             }
-
-                            // Remove the load button entirely
-                            document.getElementById("load-map").remove();
                         })
                         .catch((error) => {
                             console.error("Error loading KML:", error);
-                            const loadButton = document.getElementById("load-map");
-                            if (loadButton) {
-                                loadButton.textContent = "Error Loading Map";
-                                loadButton.disabled = false;
-                            }
                         });
                 });
         </script>
