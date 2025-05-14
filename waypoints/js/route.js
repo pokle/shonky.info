@@ -37,30 +37,67 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 /**
- * Create distance label
+ * Calculate an offset path for a line segment to avoid overlapping with existing path
  * @param {number} lat1 - Latitude of first point
- * @param {number} lon1 - Longitude of first point
+ * @param {number} lon1 - Longitude of first point 
  * @param {number} lat2 - Latitude of second point
  * @param {number} lon2 - Longitude of second point
+ * @param {boolean} isBackPath - Whether this is a return path that might overlap
+ * @returns {Array} Array of [lat, lon] pairs for the offset path
+ */
+function calculateOffsetPath(lat1, lon1, lat2, lon2, isBackPath) {
+    // If not a back path, just return the original points
+    if (!isBackPath) {
+        return [[lat1, lon1], [lat2, lon2]];
+    }
+    
+    // Calculate the angle of the line
+    const dx = lon2 - lon1;
+    const dy = lat2 - lat1;
+    const angle = Math.atan2(dy, dx);
+    
+    // Perpendicular angle (for offset)
+    const perpAngle = angle + Math.PI / 2;
+    
+    // Calculate offset (about 50-100 meters depending on scale)
+    // Convert to degrees - approximately 0.001 degree is about 100m
+    const offsetDistance = 0.0005; // ~50 meters
+    
+    // Calculate offset coordinates
+    const offsetLat = Math.sin(perpAngle) * offsetDistance;
+    const offsetLon = Math.cos(perpAngle) * offsetDistance;
+    
+    // Create offset path (add offset to both points)
+    return [
+        [lat1 + offsetLat, lon1 + offsetLon],
+        [lat2 + offsetLat, lon2 + offsetLon]
+    ];
+}
+
+/**
+ * Create distance label
+ * @param {number} lat - Latitude for label placement
+ * @param {number} lon - Longitude for label placement
+ * @param {number} origLat - Original latitude (for reference)
+ * @param {number} origLon - Original longitude (for reference)
  * @param {number} distance - Distance in kilometers
+ * @param {boolean} isReturnPath - Whether this is a return path
  * @returns {L.Marker} The created marker
  */
-function createDistanceLabel(lat1, lon1, lat2, lon2, distance) {
-    // Calculate midpoint for label placement
-    const midLat = (lat1 + lat2) / 2;
-    const midLon = (lon1 + lon2) / 2;
-    
-    // Create label icon - matching the line color (#ff4500)
+function createDistanceLabel(lat, lon, origLat, origLon, distance, isReturnPath = false) {
+    // Create label icon with appropriate color
     const distText = distance.toFixed(1) + ' km';
+    const labelClass = isReturnPath ? 'distance-label-return' : 'distance-label';
+    
     const distanceIcon = L.divIcon({
-        className: 'distance-label',
+        className: labelClass,
         html: `<div style="width:100%;text-align:center;">${distText}</div>`,
         iconSize: [80, 24],
         iconAnchor: [40, 12]
     });
     
     // Create and return the marker with high z-index to stay on top
-    return L.marker([midLat, midLon], {
+    return L.marker([lat, lon], {
         icon: distanceIcon,
         interactive: false,
         keyboard: false,
@@ -137,19 +174,45 @@ function addWaypointToRoute(marker, lat, lon, name, altitude) {
     totalDistance += segmentDistance;
     document.getElementById('total-distance').textContent = totalDistance.toFixed(1) + ' km';
     
-    // Create a line from the previous point to this one
-    const polyline = L.polyline([
-        [prevPoint.lat, prevPoint.lon],
-        [lat, lon]
-    ], {
-        color: '#ff4500',
+    // Check if this is an out-and-back segment (returning to a previously visited waypoint)
+    // Count occurrences of this waypoint in existing route
+    let occurrences = 0;
+    for (let i = 0; i < routePoints.length; i++) {
+        if (routePoints[i].lat === lat && routePoints[i].lon === lon) {
+            occurrences++;
+        }
+    }
+    
+    // It's a return path if this waypoint already exists in the route
+    const isReturnPath = occurrences > 0;
+    
+    // Create a line from the previous point to this one, with offset if needed
+    const pathPoints = calculateOffsetPath(
+        prevPoint.lat, prevPoint.lon, 
+        lat, lon, 
+        isReturnPath
+    );
+    
+    // Different colors for outbound vs return paths
+    const pathColor = isReturnPath ? '#2E86C1' : '#ff4500';
+    
+    const polyline = L.polyline(pathPoints, {
+        color: pathColor,
         weight: 3,
-        opacity: 0.7
+        opacity: 0.8,
+        // Add a dash pattern for return paths
+        dashArray: isReturnPath ? '5, 8' : null
     }).addTo(map);
     
-    // Add distance label
+    // Add distance label at midpoint of the (possibly offset) path
+    const midLat = (pathPoints[0][0] + pathPoints[1][0]) / 2;
+    const midLon = (pathPoints[0][1] + pathPoints[1][1]) / 2;
+    
+    // For distance label placement, use the midpoint of the potentially offset path
     const distanceLabel = createDistanceLabel(
-        prevPoint.lat, prevPoint.lon, lat, lon, segmentDistance
+        midLat, midLon, 
+        (prevPoint.lat + lat) / 2, (prevPoint.lon + lon) / 2, 
+        segmentDistance, isReturnPath
     );
     
     // Highlight the marker
@@ -276,6 +339,9 @@ function removeRoutePoint(index) {
     routeDistanceLabels = [];
     segmentDistances = [];
     
+    // No need to track visitedWaypoints anymore
+    // We're now detecting return paths by counting occurrences in the route array
+    
     // Reset total distance and recalculate
     totalDistance = 0;
     
@@ -295,19 +361,50 @@ function removeRoutePoint(index) {
         // Add to total distance
         totalDistance += segmentDistance;
         
-        // Create a line between points
-        const polyline = L.polyline([
-            [prevPoint.lat, prevPoint.lon],
-            [currPoint.lat, currPoint.lon]
-        ], {
-            color: '#ff4500',
+        // For rebuilding paths after point removal, 
+        // since we've already re-added all points to visitedWaypoints,
+        // we need to check if there are multiple occurrences of this waypoint
+        const waypointKey = `${currPoint.lat},${currPoint.lon}`;
+        
+        // Count occurrences of this waypoint in the route
+        let occurrences = 0;
+        for (let j = 0; j <= i; j++) {
+            if (routePoints[j].lat === currPoint.lat && routePoints[j].lon === currPoint.lon) {
+                occurrences++;
+            }
+        }
+        
+        // It's a return path if this is the second or more occurrence
+        const isReturnPath = occurrences > 1;
+        
+        // Calculate path points with offset if needed
+        const pathPoints = calculateOffsetPath(
+            prevPoint.lat, prevPoint.lon, 
+            currPoint.lat, currPoint.lon, 
+            isReturnPath
+        );
+        
+        // Different colors for outbound vs return paths
+        const pathColor = isReturnPath ? '#2E86C1' : '#ff4500';
+        
+        // Create the polyline with appropriate styling
+        const polyline = L.polyline(pathPoints, {
+            color: pathColor,
             weight: 3,
-            opacity: 0.7
+            opacity: 0.8,
+            // Add a dash pattern for return paths
+            dashArray: isReturnPath ? '5, 8' : null
         }).addTo(map);
+        
+        // Calculate midpoint for label placement
+        const midLat = (pathPoints[0][0] + pathPoints[1][0]) / 2;
+        const midLon = (pathPoints[0][1] + pathPoints[1][1]) / 2;
         
         // Add distance label
         const distLabel = createDistanceLabel(
-            prevPoint.lat, prevPoint.lon, currPoint.lat, currPoint.lon, segmentDistance
+            midLat, midLon,
+            (prevPoint.lat + currPoint.lat) / 2, (prevPoint.lon + currPoint.lon) / 2,
+            segmentDistance, isReturnPath
         );
         
         // Save to arrays
