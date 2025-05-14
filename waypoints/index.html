@@ -75,6 +75,24 @@
                 z-index: 1000 !important;
             }
             
+            /* Last point in route styling (indicates it can be removed) */
+            .waypoint-label-last {
+                background: transparent;
+                border: none;
+                padding: 1px 4px;
+                font-size: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+                cursor: not-allowed; /* Indicates removal */
+                color: #ff4500;
+                text-shadow: 
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
+                z-index: 1000 !important;
+            }
+            
             /* Non-interactive labels (like circle radius) */
             .waypoint-label-static {
                 background: transparent;
@@ -178,25 +196,35 @@
                 background-color: #ffeeee;
             }
             .distance-label {
-                background: transparent;
-                color: #ff4500;
+                background: rgba(255, 69, 0, 0.75); /* #ff4500 with opacity */
+                color: white;
+                border: 1px solid #ff4500;
+                border-radius: 3px;
                 padding: 2px 6px;
                 font-size: 11px;
                 font-weight: bold;
                 white-space: nowrap;
                 pointer-events: none;
                 z-index: 1000;
-                text-shadow: 
-                    -1px -1px 0 #fff,
-                    1px -1px 0 #fff,
-                    -1px 1px 0 #fff,
-                    1px 1px 0 #fff;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 50px;
             }
             .selected-waypoint {
                 fill: #ff4500;
                 stroke: #000;
                 stroke-width: 1;
                 r: 6;
+            }
+            
+            /* Special styling for the last point in route */
+            .last-point-hover {
+                fill: #ff0000;
+                stroke: #000;
+                stroke-width: 2;
+                r: 7;
             }
         </style>
     </head>
@@ -386,9 +414,9 @@
                                 const distText = distance.toFixed(1) + ' km';
                                 const distanceIcon = L.divIcon({
                                     className: 'distance-label',
-                                    html: distText,
-                                    iconSize: null, // Auto-size based on content
-                                    iconAnchor: [0, 12] // Anchored at the left of the text
+                                    html: `<div style="width:100%;text-align:center;">${distText}</div>`,
+                                    iconSize: [80, 24],
+                                    iconAnchor: [40, 12]
                                 });
                                 
                                 // Create and return the marker with high z-index to stay on top
@@ -402,6 +430,17 @@
                             
                             // Function to add a waypoint to the route
                             function addWaypointToRoute(marker, lat, lon, name, altitude) {
+                                // Check if this is the most recently added point
+                                if (routePoints.length > 0) {
+                                    const lastPoint = routePoints[routePoints.length - 1];
+                                    // If clicking on the same point again, remove it
+                                    if (lastPoint.name === name && lastPoint.lat === lat && lastPoint.lon === lon) {
+                                        // Remove the last point
+                                        removeRoutePoint(routePoints.length - 1);
+                                        return;
+                                    }
+                                }
+                                
                                 // If this is the first point or routing hasn't started yet
                                 if (routePoints.length === 0 || !isRoutingStarted) {
                                     // Start the route
@@ -512,10 +551,18 @@
                                 // Get active waypoint names
                                 const activeWaypoints = routePoints.map(point => point.name);
                                 
+                                // Get the last point in the route
+                                const lastPointName = routePoints[routePoints.length - 1].name;
+                                
                                 // Update all labels
                                 labelMarkers.forEach((data, name) => {
                                     let className;
-                                    if (activeWaypoints.includes(name)) {
+                                    if (name === lastPointName) {
+                                        // Last point in route - special styling to indicate it can be removed
+                                        className = 'waypoint-label-last';
+                                        data.active = true;
+                                        data.marker.setZIndexOffset(1000); // Move to front
+                                    } else if (activeWaypoints.includes(name)) {
                                         // Active waypoint
                                         className = 'waypoint-label-active';
                                         data.active = true;
@@ -790,6 +837,20 @@
                                             addWaypointToRoute(dotMarker, latitude, longitude, name, altitude);
                                         });
                                         
+                                        // Add mouse events to change cursor when hovering over the most recently added point
+                                        dotMarker.on('mouseover', function() {
+                                            if (routePoints.length > 0 && routePoints[routePoints.length - 1].name === name) {
+                                                // Last point in route - use not-allowed cursor to indicate removal
+                                                L.DomUtil.addClass(dotMarker._path, 'last-point-hover');
+                                                dotMarker._path.style.cursor = 'not-allowed';
+                                            }
+                                        });
+                                        
+                                        dotMarker.on('mouseout', function() {
+                                            L.DomUtil.removeClass(dotMarker._path, 'last-point-hover');
+                                            dotMarker._path.style.cursor = '';
+                                        });
+                                        
                                         // Save reference to ELLIOT marker
                                         if (name === "ELLIOT") {
                                             elliottMarker = dotMarker;
@@ -838,6 +899,13 @@
                                         // Add click event to the label for route planning
                                         labelMarker.on('click', function() {
                                             addWaypointToRoute(dotMarker, latitude, longitude, name, altitude);
+                                        });
+                                        
+                                        // Add mouse events to set cursor on label hover
+                                        labelMarker.on('mouseover', function() {
+                                            if (routePoints.length > 0 && routePoints[routePoints.length - 1].name === name) {
+                                                // Use CSS to show not-allowed cursor via waypoint-label-last class in updateLabelStyles
+                                            }
                                         });
                                     }
                                 }
