@@ -114,22 +114,18 @@ function createDistanceLabel(lat, lon, origLat, origLon, distance, isReturnPath 
  * @param {number} altitude - Altitude
  */
 function addWaypointToRoute(marker, lat, lon, name, altitude) {
-    // Check if this is the most recently added point
-    if (routePoints.length > 0) {
-        const lastPoint = routePoints[routePoints.length - 1];
-        // If clicking on the same point again, remove it
-        if (lastPoint.name === name && lastPoint.lat === lat && lastPoint.lon === lon) {
-            // Remove the last point
-            removeRoutePoint(routePoints.length - 1);
-            return;
-        }
-    }
+    // Always just add the point to the route, no removal logic here
     
     // If this is the first point or routing hasn't started yet
     if (routePoints.length === 0 || !isRoutingStarted) {
         // Start the route
         isRoutingStarted = true;
         document.getElementById('route-control').style.display = 'block';
+        
+        // Show the undo button
+        if (window.undoButtonControl) {
+            window.undoButtonControl.style.display = 'block';
+        }
         
         // Highlight the marker
         marker.setStyle({
@@ -546,6 +542,11 @@ function silentResetRoute() {
     isRoutingStarted = false;
     document.getElementById('route-control').style.display = 'none';
     
+    // Hide the undo button
+    if (window.undoButtonControl) {
+        window.undoButtonControl.style.display = 'none';
+    }
+    
     // Reset all label styles
     updateLabelStyles(routePoints, isRoutingStarted);
     
@@ -614,6 +615,61 @@ function initRouteHandling() {
     // Set up reset button event listener
     document.getElementById('reset-route').addEventListener('click', resetRoute);
     
+    // Create a custom Leaflet control for the undo button
+    const UndoControl = L.Control.extend({
+        options: {
+            position: 'topleft'
+        },
+        
+        onAdd: function(map) {
+            // Create container 
+            const container = L.DomUtil.create('div', 'leaflet-control-undo leaflet-bar');
+            
+            // Create button with the same styling as zoom controls
+            const button = L.DomUtil.create('a', 'undo-button', container);
+            
+            button.innerHTML = '↩️';
+            button.href = '#';
+            button.title = 'Undo last waypoint';
+            
+            // Force exact matching dimensions with zoom controls
+            button.style.width = '30px';
+            button.style.height = '30px';
+            button.style.lineHeight = '30px';
+            button.style.fontSize = '16px';
+            button.style.textAlign = 'center';
+            button.style.fontWeight = 'bold';
+            button.style.display = 'block';
+            button.style.cursor = 'pointer';
+            
+            // Add the click event listener
+            L.DomEvent.on(button, 'click', function(e) {
+                L.DomEvent.preventDefault(e);
+                if (routePoints.length > 0) {
+                    removeRoutePoint(routePoints.length - 1);
+                }
+            });
+            
+            // Prevent click events from propagating to the map
+            L.DomEvent.disableClickPropagation(container);
+            
+            return container;
+        }
+    });
+    
+    // Add the undo control to the map
+    const undoControl = new UndoControl();
+    map.addControl(undoControl);
+    
+    // Get the undo button and hide it initially (will show when route exists)
+    const undoButton = document.querySelector('.leaflet-control-undo');
+    if (undoButton) {
+        undoButton.style.display = 'none';
+        
+        // Store reference to update visibility
+        window.undoButtonControl = undoButton;
+    }
+    
     // Initialize copy URL button
     initCopyUrlButton();
 }
@@ -623,5 +679,6 @@ export {
     routePoints,
     initRouteHandling,
     loadRouteFromUrl,
-    addWaypointToRoute
+    addWaypointToRoute,
+    removeRoutePoint
 };

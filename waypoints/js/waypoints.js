@@ -93,21 +93,17 @@ function processPlacemarks(placemarks) {
                 
                 // Add click event for route planning
                 dotMarker.on('click', function() {
+                    // Click always adds a waypoint
                     addWaypointToRoute(dotMarker, latitude, longitude, name, altitude);
                 });
                 
-                // Add mouse events to change cursor when hovering over the most recently added point
+                // Add mouse events for cursor hover effects
                 dotMarker.on('mouseover', function() {
-                    if (window.routePoints.length > 0 && window.routePoints[window.routePoints.length - 1].name === name) {
-                        // Last point in route - use not-allowed cursor to indicate removal
-                        L.DomUtil.addClass(dotMarker._path, 'last-point-hover');
-                        dotMarker._path.style.cursor = 'not-allowed';
-                    }
+                    // No special cursor behavior needed anymore
                 });
                 
                 dotMarker.on('mouseout', function() {
-                    L.DomUtil.removeClass(dotMarker._path, 'last-point-hover');
-                    dotMarker._path.style.cursor = '';
+                    // Simplified mouseout behavior
                 });
                 
                 // Special handling for ELLIOT marker (competition start point)
@@ -131,14 +127,13 @@ function processPlacemarks(placemarks) {
                 
                 // Add click event to the label for route planning
                 labelMarker.on('click', function() {
+                    // Click always adds a waypoint
                     addWaypointToRoute(dotMarker, latitude, longitude, name, altitude);
                 });
                 
-                // Add mouse events to set cursor on label hover
+                // No special hover behavior needed anymore
                 labelMarker.on('mouseover', function() {
-                    if (window.routePoints.length > 0 && window.routePoints[window.routePoints.length - 1].name === name) {
-                        // Use CSS to show not-allowed cursor via waypoint-label-last class in updateLabelStyles
-                    }
+                    // Simplified hover behavior
                 });
             }
         }
