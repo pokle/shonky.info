@@ -831,16 +831,16 @@
                                 window.map.invalidateSize();
                             }, 100);
 
-                            // Update button state
-                            document.getElementById("load-map").textContent =
-                                "Map Loaded";
+                            // Remove the load button entirely
+                            document.getElementById("load-map").remove();
                         })
                         .catch((error) => {
                             console.error("Error loading KML:", error);
-                            document.getElementById("load-map").textContent =
-                                "Error Loading Map";
-                            document.getElementById("load-map").disabled =
-                                false;
+                            const loadButton = document.getElementById("load-map");
+                            if (loadButton) {
+                                loadButton.textContent = "Error Loading Map";
+                                loadButton.disabled = false;
+                            }
                         });
                 });
         </script>
