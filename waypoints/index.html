@@ -31,14 +31,14 @@
                 white-space: nowrap;
                 cursor: pointer;
                 color: black;
-                text-shadow: 
+                text-shadow:
                     -1px -1px 0 #fff,
                     1px -1px 0 #fff,
                     -1px 1px 0 #fff,
                     1px 1px 0 #fff;
                 transition: opacity 0.3s;
             }
-            
+
             /* Dimmed label when not in route */
             .waypoint-label-dimmed {
                 background: transparent;
@@ -50,13 +50,13 @@
                 white-space: nowrap;
                 cursor: pointer;
                 color: black;
-                text-shadow: 
+                text-shadow:
                     -1px -1px 0 #fff,
                     1px -1px 0 #fff,
                     -1px 1px 0 #fff,
                     1px 1px 0 #fff;
             }
-            
+
             /* Active label in route */
             .waypoint-label-active {
                 background: transparent;
@@ -67,14 +67,14 @@
                 white-space: nowrap;
                 cursor: pointer;
                 color: #ff4500;
-                text-shadow: 
+                text-shadow:
                     -1px -1px 0 #fff,
                     1px -1px 0 #fff,
                     -1px 1px 0 #fff,
                     1px 1px 0 #fff;
                 z-index: 1000 !important;
             }
-            
+
             /* Last point in route styling (indicates it can be removed) */
             .waypoint-label-last {
                 background: transparent;
@@ -85,14 +85,14 @@
                 white-space: nowrap;
                 cursor: not-allowed; /* Indicates removal */
                 color: #ff4500;
-                text-shadow: 
+                text-shadow:
                     -1px -1px 0 #fff,
                     1px -1px 0 #fff,
                     -1px 1px 0 #fff,
                     1px 1px 0 #fff;
                 z-index: 1000 !important;
             }
-            
+
             /* Non-interactive labels (like circle radius) */
             .waypoint-label-static {
                 background: transparent;
@@ -103,7 +103,7 @@
                 white-space: nowrap;
                 pointer-events: none;
                 color: #3388ff;
-                text-shadow: 
+                text-shadow:
                     -1px -1px 0 #fff,
                     1px -1px 0 #fff,
                     -1px 1px 0 #fff,
@@ -124,7 +124,7 @@
             .x-marker {
                 color: white;
                 font-weight: bold;
-                text-shadow: 
+                text-shadow:
                     -1px -1px 0 #000,
                     1px -1px 0 #000,
                     -1px 1px 0 #000,
@@ -139,7 +139,7 @@
                 box-shadow: 0 1px 5px rgba(0,0,0,0.4);
                 margin-bottom: 5px;
             }
-            
+
             .route-points-container {
                 margin: 10px 0;
                 max-height: 200px;
@@ -148,12 +148,12 @@
                 border-radius: 4px;
                 padding: 5px;
             }
-            
+
             .route-points-container h5 {
                 margin-top: 0;
                 margin-bottom: 8px;
             }
-            
+
             .route-point-item {
                 display: flex;
                 justify-content: space-between;
@@ -161,24 +161,24 @@
                 padding: 4px 0;
                 border-bottom: 1px solid #eee;
             }
-            
+
             .route-point-item:last-child {
                 border-bottom: none;
             }
-            
+
             .route-point-info {
                 flex-grow: 1;
             }
-            
+
             .route-point-name {
                 font-weight: bold;
             }
-            
+
             .route-point-distance {
                 color: #ff4500;
                 font-size: 0.9em;
             }
-            
+
             .route-point-remove {
                 color: #ff4500;
                 cursor: pointer;
@@ -191,7 +191,7 @@
                 border-radius: 3px;
                 line-height: 1;
             }
-            
+
             .route-point-remove:hover {
                 background-color: #ffeeee;
             }
@@ -212,7 +212,7 @@
                 align-items: center;
                 min-width: 50px;
             }
-            
+
             /* Style for return path distance labels */
             .distance-label-return {
                 background: rgba(46, 134, 193, 0.75); /* #2E86C1 with opacity */
@@ -237,7 +237,7 @@
                 stroke-width: 1;
                 r: 6;
             }
-            
+
             /* Special styling for the last point in route */
             .last-point-hover {
                 fill: #ff0000;
@@ -245,19 +245,19 @@
                 stroke-width: 2;
                 r: 7;
             }
-            
+
             /* Undo button styling */
             .leaflet-control-undo {
                 clear: none !important;
                 margin-top: 5px !important;
             }
-            
+
             .leaflet-control-undo a {
                 background-color: #fff;
                 border-bottom: 1px solid #ccc;
                 border-radius: 4px;
             }
-            
+
             .leaflet-control-undo a:hover {
                 background-color: #f4f4f4;
             }
@@ -274,14 +274,14 @@
                 <h4>Route Planning</h4>
                 <p>Starting from: <span id="route-start"></span></p>
                 <p>Total Distance: <span id="total-distance">0.0 km</span></p>
-                
+
                 <div class="route-points-container">
                     <h5>Route Points:</h5>
                     <div id="route-points-list">
                         <!-- Route points will be added here dynamically -->
                     </div>
                 </div>
-                
+
                 <div id="share-route-container" style="margin: 10px 0;">
                     <h5>Share this route:</h5>
                     <div style="display: flex;">
@@ -289,7 +289,7 @@
                         <button id="copy-url" class="primary" style="white-space: nowrap;">Copy</button>
                     </div>
                 </div>
-                
+
                 <button id="reset-route" class="secondary">Start Again</button>
             </div>
         </div>
