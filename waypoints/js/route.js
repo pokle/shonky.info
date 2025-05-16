@@ -112,9 +112,39 @@ function createDistanceLabel(lat, lon, origLat, origLon, distance, isReturnPath 
  * @param {number} lon - Longitude
  * @param {string} name - Waypoint name
  * @param {number} altitude - Altitude
+ * @returns {boolean} True if waypoint was added, false if it was a duplicate
  */
 function addWaypointToRoute(marker, lat, lon, name, altitude) {
-    // Always just add the point to the route, no removal logic here
+    // Check if this waypoint is the same as the last one in the route
+    if (routePoints.length > 0) {
+        const lastPoint = routePoints[routePoints.length - 1];
+        if (lastPoint.name === name && lastPoint.lat === lat && lastPoint.lon === lon) {
+            // This is a duplicate of the last point - don't add it
+            console.log(`Prevented adding duplicate waypoint ${name}`);
+            
+            // Flash the marker to provide visual feedback
+            const originalFillColor = marker.options.fillColor;
+            const originalRadius = marker.options.radius;
+            
+            // Flash effect by changing marker style briefly
+            marker.setStyle({
+                radius: 8,
+                fillColor: '#ff0000',
+                fillOpacity: 0.8
+            });
+            
+            // Reset after a short delay
+            setTimeout(() => {
+                marker.setStyle({
+                    radius: originalRadius || 6,
+                    fillColor: originalFillColor || '#ff4500',
+                    fillOpacity: 1
+                });
+            }, 300);
+            
+            return false;
+        }
+    }
     
     // If this is the first point or routing hasn't started yet
     if (routePoints.length === 0 || !isRoutingStarted) {
@@ -152,7 +182,7 @@ function addWaypointToRoute(marker, lat, lon, name, altitude) {
         // Initialize the route points list
         updateRoutePointsList();
         
-        return;
+        return true;
     }
     
     // Get the previous point
@@ -237,6 +267,8 @@ function addWaypointToRoute(marker, lat, lon, name, altitude) {
     
     // Update URL with the new route
     updateRouteInUrl();
+    
+    return true;
 }
 
 /**
