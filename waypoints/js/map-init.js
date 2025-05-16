@@ -12,28 +12,27 @@ let map;
 function initializeMap() {
     // Initialize the map
     map = L.map("map").setView([-36.19, 147.89], 10); // Approximate Corryong coordinates
-    
+
     // Define base map layers
     const satelliteLayer = L.tileLayer(
         "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}", {
-            attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
             maxZoom: 18
         }
     );
-    
+
     const streetLayer = L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             maxZoom: 19
         }
     );
-    
+
     // Add satellite layer to map by default
     satelliteLayer.addTo(map);
-    
+
     // Add a simple map type control
     addMapTypeControl(satelliteLayer, streetLayer);
-    
+
     return map;
 }
 
@@ -44,7 +43,7 @@ function initializeMap() {
  */
 function addMapTypeControl(satelliteLayer, streetLayer) {
     const mapTypeControl = L.control({position: 'topright'});
-    
+
     mapTypeControl.onAdd = function() {
         const div = L.DomUtil.create('div', 'map-type-control');
         div.innerHTML = 'Switch to Street Map';
@@ -61,7 +60,7 @@ function addMapTypeControl(satelliteLayer, streetLayer) {
         };
         return div;
     };
-    
+
     mapTypeControl.addTo(map);
 }
 
