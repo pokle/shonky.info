@@ -118,6 +118,7 @@ function updateDistanceLabels() {
         keyIndicesMap[key].push(idx + 1);
     });
     routeDistanceLabels.forEach((marker, j) => {
+        marker.setZIndexOffset(1000 + j);
         const key = segmentKeys[j];
         const indices = keyIndicesMap[key];
         const distance = segmentDistances[j];
