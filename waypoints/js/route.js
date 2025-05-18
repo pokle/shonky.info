@@ -3,6 +3,7 @@
  */
 import { map } from './map-init.js';
 import { waypointMap, updateLabelStyles, ensureElliotCircleVisible } from './waypoints.js';
+import { isImmediateReturn } from './route-utils.js';
 
 // Route planning variables
 let routePoints = []; // To store selected waypoints for the route
@@ -200,17 +201,7 @@ function addWaypointToRoute(marker, lat, lon, name, altitude) {
     totalDistance += segmentDistance;
     document.getElementById('total-distance').textContent = totalDistance.toFixed(1) + ' km';
     
-    // Check if this is an out-and-back segment (returning to a previously visited waypoint)
-    // Count occurrences of this waypoint in existing route
-    let occurrences = 0;
-    for (let i = 0; i < routePoints.length; i++) {
-        if (routePoints[i].lat === lat && routePoints[i].lon === lon) {
-            occurrences++;
-        }
-    }
-    
-    // It's a return path if this waypoint already exists in the route
-    const isReturnPath = occurrences > 0;
+    const isReturnPath = isImmediateReturn(routePoints, { lat, lon });
     
     // Create a line from the previous point to this one, with offset if needed
     const pathPoints = calculateOffsetPath(
@@ -367,8 +358,6 @@ function removeRoutePoint(index) {
     routeDistanceLabels = [];
     segmentDistances = [];
     
-    // No need to track visitedWaypoints anymore
-    // We're now detecting return paths by counting occurrences in the route array
     
     // Reset total distance and recalculate
     totalDistance = 0;
@@ -389,21 +378,7 @@ function removeRoutePoint(index) {
         // Add to total distance
         totalDistance += segmentDistance;
         
-        // For rebuilding paths after point removal, 
-        // since we've already re-added all points to visitedWaypoints,
-        // we need to check if there are multiple occurrences of this waypoint
-        const waypointKey = `${currPoint.lat},${currPoint.lon}`;
-        
-        // Count occurrences of this waypoint in the route
-        let occurrences = 0;
-        for (let j = 0; j <= i; j++) {
-            if (routePoints[j].lat === currPoint.lat && routePoints[j].lon === currPoint.lon) {
-                occurrences++;
-            }
-        }
-        
-        // It's a return path if this is the second or more occurrence
-        const isReturnPath = occurrences > 1;
+        const isReturnPath = isImmediateReturn(routePoints, currPoint, i);
         
         // Calculate path points with offset if needed
         const pathPoints = calculateOffsetPath(
