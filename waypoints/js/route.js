@@ -10,6 +10,8 @@ let routePoints = []; // To store selected waypoints for the route
 let routePolylines = []; // To store the polylines between waypoints
 let routeDistanceLabels = []; // To store distance labels
 let segmentDistances = []; // To store distance of each segment
+let segmentKeys = []; // To store segment key (prev->curr) for grouping indices
+let segmentIsReturnFlags = []; // To store return-path flag for each segment
 let totalDistance = 0; // Total route distance
 let isRoutingStarted = false;
 
@@ -104,6 +106,31 @@ function createDistanceLabel(lat, lon, origLat, origLon, distance, isReturnPath 
         keyboard: false,
         zIndexOffset: 1000 // Ensure distance labels stay on top
     }).addTo(map);
+}
+
+/**
+ * Update distance label markers to prefix with segment indices for repeated segments.
+ */
+function updateDistanceLabels() {
+    const keyIndicesMap = {};
+    segmentKeys.forEach((key, idx) => {
+        if (!keyIndicesMap[key]) keyIndicesMap[key] = [];
+        keyIndicesMap[key].push(idx + 1);
+    });
+    routeDistanceLabels.forEach((marker, j) => {
+        const key = segmentKeys[j];
+        const indices = keyIndicesMap[key];
+        const distance = segmentDistances[j];
+        const labelClass = segmentIsReturnFlags[j] ? 'distance-label-return' : 'distance-label';
+        const text = indices.join(', ') + ': ' + distance.toFixed(1) + ' km';
+        const icon = L.divIcon({
+            className: labelClass,
+            html: `<div style="width:100%;text-align:center;">${text}</div>`,
+            iconSize: [80, 24],
+            iconAnchor: [40, 12]
+        });
+        marker.setIcon(icon);
+    });
 }
 
 /**
@@ -202,6 +229,9 @@ function addWaypointToRoute(marker, lat, lon, name, altitude) {
     document.getElementById('total-distance').textContent = totalDistance.toFixed(1) + ' km';
     
     const isReturnPath = isImmediateReturn(routePoints, { lat, lon });
+    const segmentKey = `${prevPoint.name}->${name}`;
+    segmentKeys.push(segmentKey);
+    segmentIsReturnFlags.push(isReturnPath);
     
     // Create a line from the previous point to this one, with offset if needed
     const pathPoints = calculateOffsetPath(
@@ -249,6 +279,7 @@ function addWaypointToRoute(marker, lat, lon, name, altitude) {
     });
     routePolylines.push(polyline);
     routeDistanceLabels.push(distanceLabel);
+    updateDistanceLabels();
     
     // Update label styles to highlight active waypoints and dim others
     updateLabelStyles(routePoints, isRoutingStarted);
@@ -357,6 +388,8 @@ function removeRoutePoint(index) {
     routePolylines = [];
     routeDistanceLabels = [];
     segmentDistances = [];
+    segmentKeys = [];
+    segmentIsReturnFlags = [];
     
     
     // Reset total distance and recalculate
@@ -379,6 +412,9 @@ function removeRoutePoint(index) {
         totalDistance += segmentDistance;
         
         const isReturnPath = isImmediateReturn(routePoints, currPoint, i);
+        const segmentKey = `${prevPoint.name}->${currPoint.name}`;
+        segmentIsReturnFlags.push(isReturnPath);
+        segmentKeys.push(segmentKey);
         
         // Calculate path points with offset if needed
         const pathPoints = calculateOffsetPath(
@@ -415,6 +451,7 @@ function removeRoutePoint(index) {
         routeDistanceLabels.push(distLabel);
     }
     
+    updateDistanceLabels();
     // Update total distance display
     document.getElementById('total-distance').textContent = totalDistance.toFixed(1) + ' km';
     
@@ -539,6 +576,8 @@ function silentResetRoute() {
     routePolylines = [];
     routeDistanceLabels = [];
     segmentDistances = [];
+    segmentKeys = [];
+    segmentIsReturnFlags = [];
     
     // Reset total distance
     totalDistance = 0;
