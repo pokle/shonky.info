@@ -1,0 +1,26 @@
+{
+  "name": "shonky.info",
+  "version": "1.0.0",
+  "description": "**Important**  This file is available on the website - add no secrets here.",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pokle/shonky.info.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pokle/shonky.info/issues"
+  },
+  "homepage": "https://github.com/pokle/shonky.info#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "playwright": "^1.52.0"
+  }
+}
