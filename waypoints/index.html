@@ -1,24 +1,354 @@
 <html>
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-</head>
-<body>
+    <head>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/mini.css/3.0.1/mini-default.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+            crossorigin=""
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            #map {
+                height: 400px;
+                width: 100%;
+                margin-bottom: 20px;
+                display: block; /* Always show map */
+            }
+            .map-container {
+                margin-bottom: 20px;
+            }
+            /* Style for waypoint labels */
+            .waypoint-label {
+                background: transparent;
+                border: none;
+                padding: 1px 4px;
+                font-size: 11px;
+                font-weight: bold;
+                white-space: nowrap;
+                cursor: pointer;
+                color: black;
+                text-shadow:
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
+                transition: opacity 0.3s;
+            }
 
-    <h1>Waypoints</h1>
+            /* Dimmed label when not in route */
+            .waypoint-label-dimmed {
+                background: transparent;
+                opacity: 0.7;
+                border: none;
+                padding: 1px 4px;
+                font-size: 11px;
+                font-weight: bold;
+                white-space: nowrap;
+                cursor: pointer;
+                color: black;
+                text-shadow:
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
+            }
 
-    <ul>
-        <li><a href="Corryong 2021 waypoints OZiexplorer.wpt">Corryong 2021 waypoints OZiexplorer.wpt</a>
-        <li><a href="Corryong 2021 waypoints.cup">Corryong 2021 waypoints.cup</a>
-        <li><a href="Corryong 2021 waypoints.gpx">Corryong 2021 waypoints.gpx</a>
-        <li><a href="Corryong 2021 waypoints.kml">Corryong 2021 waypoints.kml</a>
-        <li><a href="bigk wpt file 241117 OZiexplorer.wpt">bigk wpt file 241117 OZiexplorer.wpt</a>
-        <li><a href="bigk wpt file 241117.gpx">bigk wpt file 241117.gpx</a>
-        <li><a href="birchip.wpt">birchip.wpt</a>
-        <li><a href="westvic.wpt">westvic.wpt</a>
-        <li><a href="TPCVictoria2021-v1.0-swapped.wpt">Turn Point Challenge Victoria 2021-v1.0 - names and descriptions swapped - in WPT format</a></li>
-        <li><a href="TPCVictoria2021-v1.0-swapped.kml">Turn Point Challenge Victoria 2021-v1.0 - names and descriptions swapped - in KML format</a></li>
-    </ul>
+            /* Active label in route */
+            .waypoint-label-active {
+                background: transparent;
+                border: none;
+                padding: 1px 4px;
+                font-size: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+                cursor: pointer;
+                color: #ff4500;
+                text-shadow:
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
+                z-index: 1000 !important;
+            }
 
-</body>
+            /* Last point in route styling (indicates it can be removed) */
+            .waypoint-label-last {
+                background: transparent;
+                border: none;
+                padding: 1px 4px;
+                font-size: 12px;
+                font-weight: bold;
+                white-space: nowrap;
+                cursor: not-allowed; /* Indicates removal */
+                color: #ff4500;
+                text-shadow:
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
+                z-index: 1000 !important;
+            }
+
+            /* Non-interactive labels (like circle radius) */
+            .waypoint-label-static {
+                background: transparent;
+                border: none;
+                padding: 1px 4px;
+                font-size: 11px;
+                font-weight: bold;
+                white-space: nowrap;
+                pointer-events: none;
+                color: #3388ff;
+                text-shadow:
+                    -1px -1px 0 #fff,
+                    1px -1px 0 #fff,
+                    -1px 1px 0 #fff,
+                    1px 1px 0 #fff;
+            }
+            /* Map control style */
+            .map-type-control {
+                background: white;
+                padding: 5px 10px;
+                border-radius: 4px;
+                box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+                cursor: pointer;
+            }
+            .map-type-control:hover {
+                background: #f4f4f4;
+            }
+            /* X marker style */
+            .x-marker {
+                color: white;
+                font-weight: bold;
+                text-shadow:
+                    -1px -1px 0 #000,
+                    1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px 1px 0 #000;
+                font-size: 16px;
+            }
+            /* Route planning controls */
+            .route-planning-control {
+                background: white;
+                padding: 10px;
+                border-radius: 4px;
+                box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+                margin-bottom: 5px;
+            }
+
+            .route-points-container {
+                margin: 10px 0;
+                max-height: 200px;
+                overflow-y: auto;
+                border: 1px solid #eee;
+                border-radius: 4px;
+                padding: 5px;
+            }
+
+            .route-points-container h5 {
+                margin-top: 0;
+                margin-bottom: 8px;
+            }
+
+            .route-point-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 4px 0;
+                border-bottom: 1px solid #eee;
+            }
+
+            .route-point-item:last-child {
+                border-bottom: none;
+            }
+
+            .route-point-info {
+                flex-grow: 1;
+            }
+
+            .route-point-name {
+                font-weight: bold;
+            }
+
+            .route-point-distance {
+                color: #ff4500;
+                font-size: 0.9em;
+            }
+
+            .route-point-remove {
+                color: #ff4500;
+                cursor: pointer;
+                font-weight: bold;
+                font-size: 16px;
+                background: none;
+                border: none;
+                padding: 2px 8px;
+                margin-left: 5px;
+                border-radius: 3px;
+                line-height: 1;
+            }
+
+            .route-point-remove:hover {
+                background-color: #ffeeee;
+            }
+            .distance-label {
+                background: rgba(255, 69, 0, 0.75); /* #ff4500 with opacity */
+                color: white;
+                border: 1px solid #ff4500;
+                border-radius: 3px;
+                padding: 2px 6px;
+                font-size: 11px;
+                font-weight: bold;
+                white-space: nowrap;
+                pointer-events: none;
+                z-index: 1000;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 50px;
+            }
+
+            /* Style for return path distance labels */
+            .distance-label-return {
+                background: rgba(46, 134, 193, 0.75); /* #2E86C1 with opacity */
+                color: white;
+                border: 1px solid #2E86C1;
+                border-radius: 3px;
+                padding: 2px 6px;
+                font-size: 11px;
+                font-weight: bold;
+                white-space: nowrap;
+                pointer-events: none;
+                z-index: 1000;
+                text-align: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-width: 50px;
+            }
+            .selected-waypoint {
+                fill: #ff4500;
+                stroke: #000;
+                stroke-width: 1;
+                r: 6;
+            }
+
+            /* Special styling for the last point in route */
+            .last-point-hover {
+                fill: #ff0000;
+                stroke: #000;
+                stroke-width: 2;
+                r: 7;
+            }
+
+            /* Undo button styling */
+            .leaflet-control-undo {
+                clear: none !important;
+                margin-top: 5px !important;
+            }
+
+            .leaflet-control-undo a {
+                background-color: #fff;
+                border-bottom: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .leaflet-control-undo a:hover {
+                background-color: #f4f4f4;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Waypoints</h1>
+
+        <h2>Corryong</h2>
+
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="route-planning-control" id="route-control" style="display: none;">
+                <h4>Route Planning</h4>
+                <p>Starting from: <span id="route-start"></span></p>
+                <p>Total Distance: <span id="total-distance">0.0 km</span></p>
+
+                <div class="route-points-container">
+                    <h5>Route Points:</h5>
+                    <div id="route-points-list">
+                        <!-- Route points will be added here dynamically -->
+                    </div>
+                </div>
+
+                <div id="share-route-container" style="margin: 10px 0;">
+                    <h5>Share this route:</h5>
+                    <div style="display: flex;">
+                        <input type="text" id="share-url" readonly style="flex-grow: 1; margin-right: 5px;" />
+                        <button id="copy-url" class="primary" style="white-space: nowrap;">Copy</button>
+                    </div>
+                </div>
+
+                <button id="reset-route" class="secondary">Start Again</button>
+            </div>
+        </div>
+
+        <ul>
+            <li>
+                <a href="Corryong 2021 waypoints OZiexplorer.wpt"
+                    >Corryong 2021 waypoints OZiexplorer.wpt</a
+                >
+            </li>
+            <li>
+                <a href="Corryong 2021 waypoints.cup"
+                    >Corryong 2021 waypoints.cup</a
+                >
+            </li>
+            <li>
+                <a href="Corryong 2021 waypoints.gpx"
+                    >Corryong 2021 waypoints.gpx</a
+                >
+            </li>
+            <li>
+                <a href="Corryong 2021 waypoints.kml"
+                    >Corryong 2021 waypoints.kml</a
+                >
+            </li>
+        </ul>
+
+        <h2>Rest of Victoria</h2>
+        <ul>
+            <li>
+                <a href="bigk wpt file 241117 OZiexplorer.wpt"
+                    >bigk wpt file 241117 OZiexplorer.wpt</a
+                >
+            </li>
+            <li>
+                <a href="bigk wpt file 241117.gpx">bigk wpt file 241117.gpx</a>
+            </li>
+            <li><a href="birchip.wpt">birchip.wpt</a></li>
+            <li><a href="westvic.wpt">westvic.wpt</a></li>
+            <li>
+                <a href="TPCVictoria2021-v1.0-swapped.wpt"
+                    >Turn Point Challenge Victoria 2021-v1.0 - names and
+                    descriptions swapped - in WPT format</a
+                >
+            </li>
+            <li>
+                <a href="TPCVictoria2021-v1.0-swapped.kml"
+                    >Turn Point Challenge Victoria 2021-v1.0 - names and
+                    descriptions swapped - in KML format</a
+                >
+            </li>
+        </ul>
+
+        <script
+            src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""
+        ></script>
+        <!-- Import modular JavaScript files -->
+        <script type="module" src="js/main.js"></script>
+    </body>
 </html>

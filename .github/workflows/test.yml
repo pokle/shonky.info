@@ -1,0 +1,23 @@
+name: Run tests
+
+on:
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '23'
+
+      - name: Run tests
+        run: |
+          for file in $(find . -type f -name '*.test.js'); do
+            echo "Running $file"
+            node "$file"
+          done
