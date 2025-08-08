@@ -7,7 +7,7 @@ import { addWaypointToRoute, removeRoutePoint, routePoints } from './route.js';
 // Store waypoints and related data
 const waypointMap = new Map(); // To store waypoints by name
 const labelMarkers = new Map(); // Map of name to label marker
-let elliottMarker = null; // Reference to the ELLIOT marker
+let elliotMarker = null; // Reference to the ELLIOT marker
 let elliotCircle = null; // 5km radius circle around ELLIOT
 
 // Long press handling variables
@@ -536,7 +536,7 @@ function processPlacemarks(placemarks) {
  * @param {number} longitude - Longitude
  */
 function handleElliotMarker(marker, latitude, longitude) {
-    elliottMarker = marker;
+    elliotMarker = marker;
 
     // Add a 5km radius circle around ELLIOT (competition start circle)
     elliotCircle = L.circle([latitude, longitude], {
