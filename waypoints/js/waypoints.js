@@ -34,6 +34,7 @@ let contextMenuPrevented = false;
  * @returns {Promise} - Promise that resolves when waypoints are loaded
  */
 function loadWaypoints(kmlFilePath) {
+    const bounds = L.latLngBounds();
     // Safari-specific workarounds
     if (isSafari || isIOS) {
         console.log("Safari/iOS detected - applying specialized event handling");
@@ -130,7 +131,8 @@ function loadWaypoints(kmlFilePath) {
 
             // Extract waypoints from the KML file
             const placemarks = kml.getElementsByTagName("Placemark");
-            processPlacemarks(placemarks);
+            processPlacemarks(placemarks, bounds);
+            map.fitBounds(bounds.pad(0.05));
 
             // A brief timeout to ensure map renders properly after showing
             setTimeout(function() {
@@ -146,7 +148,7 @@ function loadWaypoints(kmlFilePath) {
  * Process placemarks from KML file and add them to the map
  * @param {NodeList} placemarks - The placemarks from the KML file
  */
-function processPlacemarks(placemarks) {
+function processPlacemarks(placemarks, bounds) {
     for (let i = 0; i < placemarks.length; i++) {
         const placemark = placemarks[i];
 
@@ -182,6 +184,8 @@ function processPlacemarks(placemarks) {
                 })
                 .addTo(map)
                 .bindPopup(`<b>${name}</b>${altDisplay}<br>${desc}`);
+
+                bounds.extend([latitude, longitude]);
 
                 // Store waypoint data for route planning
                 waypointMap.set(name, {
