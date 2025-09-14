@@ -12,6 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/pokle/shonky.info.git"
   },
+  "packageManager": "pnpm@10.12.4",
   "keywords": [],
   "author": "",
   "license": "ISC",
