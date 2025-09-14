@@ -4,14 +4,15 @@
   "description": "**Important**  This file is available on the website - add no secrets here.",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:ui": "playwright test --ui"
+    "test": "playwright install && playwright test",
+    "test:headed": "playwright install && playwright test --headed",
+    "test:ui": "playwright install && playwright test --ui"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pokle/shonky.info.git"
   },
+  "packageManager": "pnpm@10.12.4",
   "keywords": [],
   "author": "",
   "license": "ISC",
