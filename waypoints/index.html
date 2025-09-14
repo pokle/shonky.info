@@ -22,6 +22,13 @@
             .map-container {
                 margin-bottom: 20px;
             }
+
+            /* Ensure Leaflet layer control icon renders correctly */
+            .leaflet-control-layers-toggle {
+                background-repeat: no-repeat !important;
+                background-size: 16px 16px !important;
+                background-position: center !important;
+            }
             /* Style for waypoint labels */
             .waypoint-label {
                 background: transparent;
@@ -109,17 +116,6 @@
                     1px -1px 0 #fff,
                     -1px 1px 0 #fff,
                     1px 1px 0 #fff;
-            }
-            /* Map control style */
-            .map-type-control {
-                background: white;
-                padding: 5px 10px;
-                border-radius: 4px;
-                box-shadow: 0 1px 5px rgba(0,0,0,0.4);
-                cursor: pointer;
-            }
-            .map-type-control:hover {
-                background: #f4f4f4;
             }
             /* X marker style */
             .x-marker {
