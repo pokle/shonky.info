@@ -17,14 +17,21 @@ The site is deployed on Cloudflare Pages. Changes are deployed by pushing to the
 
 - `/index.html` - Main site page
 - `/waypoints/` - Directory containing hang gliding GPS waypoints in various formats
-  - `/waypoints/index.html` - Page listing available waypoint files
+  - `/waypoints/index.html` - The waypoints editor.
 - `/functions/` - Contains Cloudflare Pages Functions
   - `/functions/api/posts.js` - Simple API endpoint returning static JSON
   - `/functions/api/[[id]].js` - API endpoint accepting a path parameter
 
 ## Development
 
-The site is a static HTML site using the mini.css framework. There is no build process or package management.
+The site is a static HTML site using the mini.css framework.
+
+There are Playwright tests for end-to-end testing the waypoints editor.
+
+Commands:
+- First run `pnpm exec playwright install` to install Playwright browsers
+- Then run `pnpm test` to run the Playwright tests
+
 
 ### Adding New Waypoints
 
