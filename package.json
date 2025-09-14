@@ -4,9 +4,9 @@
   "description": "**Important**  This file is available on the website - add no secrets here.",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test",
-    "test:headed": "playwright test --headed",
-    "test:ui": "playwright test --ui"
+    "test": "playwright install && playwright test",
+    "test:headed": "playwright install && playwright test --headed",
+    "test:ui": "playwright install && playwright test --ui"
   },
   "repository": {
     "type": "git",
