@@ -12,19 +12,22 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
+
     - name: Set up Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '23' # Specify your desired Node.js version
 
     - name: Install dependencies
-      run: npm ci
+      run: pnpm install
 
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
+      run: pnpm playwright install --with-deps
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: pnpm test
 
     - name: Upload report
       if: always()
